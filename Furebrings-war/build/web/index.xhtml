@@ -17,6 +17,8 @@
         <title>Startsida</title>
     </h:head>
     <h:body>
+        
+        <!-- Navigation start -->
         <div id="navigation">
             <nav>
                 <div class="nav-wrapper white">
@@ -28,7 +30,7 @@
                                 <li><h:inputText value="sökfält" class="black-text"></h:inputText></li>
                                 <li><i class="fas fa-search black-text"></i></li>
                                 <li><h:commandLink class="black-text">Kundvagn</h:commandLink></li>
-                                <li><h:commandLink class="black-text">logga in/konto</h:commandLink></li>
+                                <li><h:commandLink class="black-text" action="login">logga in/konto</h:commandLink></li>
                             </h:form>
                         </f:view>
                     </ul>
@@ -49,6 +51,7 @@
                 </div>    
             </div>
         </div>
+        <!-- Navigation end -->
         
         
         <div class="row">
