@@ -25,6 +25,7 @@ public class Customer implements Serializable {
     private String postalCode;
     private String city;
     private String country;
+    private float totalSpent;
     
     @OneToMany(cascade=PERSIST, mappedBy="customer")
     private List<Orders> orders = new ArrayList<>();
@@ -37,6 +38,17 @@ public class Customer implements Serializable {
         this.postalCode = postalCode;
         this.city = city;
         this.country = country;
+    }
+
+    public Customer(String firstName, String lastName, String phoneNumber, String address, String postalCode, String city, String country, float totalSpent) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.country = country;
+        this.totalSpent = totalSpent;
     }
 
     public Customer() {
@@ -104,6 +116,14 @@ public class Customer implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public float getTotalSpent() {
+        return totalSpent;
+    }
+
+    public void setTotalSpent(float totalSpent) {
+        this.totalSpent = totalSpent;
     }
 
     public List<Orders> getOrders() {
