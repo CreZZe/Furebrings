@@ -11,5 +11,7 @@ import javax.ejb.Local;
 public interface DatabaseControllerLocal {
 
     boolean addCustomer(Account acc);
+
+    boolean addAccount(Account acc);
     
 }

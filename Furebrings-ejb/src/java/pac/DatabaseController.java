@@ -24,8 +24,24 @@ public class DatabaseController implements DatabaseControllerLocal {
 
     @Override
     public boolean addCustomer(Account acc) {
-        em.persist(acc);
-        return true;
+        try {
+            persist(acc);
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addAccount(Account acc) {
+        try {
+            persist(acc);
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
     
     

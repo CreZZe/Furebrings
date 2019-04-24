@@ -9,7 +9,12 @@
     <h:body>
         <f:view>
             <h:form>
-                <h:commandButton value="Add Customer" action="#{controller.test}"></h:commandButton>
+                <h:commandButton value="Add Customers" action="#{controller.test}"></h:commandButton>
+                <br />
+                <br />
+                <h:inputText value="#{controller.mail}"></h:inputText>
+                <h:inputSecret value="#{controller.pass}"></h:inputSecret>
+                <h:commandButton value="Create Account" action="#{controller.addAccount}"></h:commandButton>
             </h:form>
         </f:view>
     </h:body>

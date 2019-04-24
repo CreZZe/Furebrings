@@ -23,14 +23,39 @@ public class Controller implements Serializable {
     private DatabaseControllerLocal databaseController;
 
     private Account acc;
+    private String mail;
+    private String pass;
+    private String accRole;
+    private Customer customer;
     /**
      * Creates a new instance of Controller
      */
     public Controller() {
     }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
     
     public void addCustomer() {
         databaseController.addCustomer(acc);
+    }
+    
+    public void addAccount() {
+        acc = new Account(mail, pass, "Vanlig", null);
+        databaseController.addAccount(acc);
     }
     
     public void test() {
