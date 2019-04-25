@@ -26,7 +26,9 @@
                     <ul id="nav-mobile" class="right hide-on-med-and-down" style="display: inline">
                         <f:view>
                             <h:form>
-                                <li><h:inputText value="sökfält" class="black-text"></h:inputText></li>
+                                <li><h:inputText value="sökfält" class="black-text">
+                                        
+                                    </h:inputText></li>
                                 <li><i class="fas fa-search black-text"></i></li>
                                 <li><h:commandLink class="black-text">Kundvagn</h:commandLink></li>
                                 <li><h:commandLink class="black-text" action="login">logga in/konto</h:commandLink></li>
@@ -40,10 +42,18 @@
                     <ul class="cat">
                         <f:view>
                             <h:form>
-                                <li><h:commandButton value="Kategori 1" class="btn blue"></h:commandButton></li>
-                                <li><h:commandButton value="Kategori 2" class="btn blue"></h:commandButton></li>
-                                <li><h:commandButton value="Kategori 3" class="btn blue"></h:commandButton></li>
-                                <li><h:commandButton value="Kategori 4" class="btn blue"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 1" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
+                                <li><h:commandButton value="Kategori 2" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
+                                <li><h:commandButton value="Kategori 3" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
+                                <li><h:commandButton value="Kategori 4" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
                             </h:form>
                         </f:view>
                     </ul>
@@ -60,52 +70,80 @@
 
                     <div class="row col s6 offset-s2">
                         <p>Förnamn</p>
-                    <h:inputText></h:inputText>
+                        <h:inputText id="firstname">
+                            <f:validator validatorId="textInputValidator"></f:validator>
+                        </h:inputText>
+                        <h:message for="firstname" errorStyle="color:red"/>
                     </div>
 
                     <div class="row col s6 offset-s2">
                         <p>Efternamn</p>
-                    <h:inputText></h:inputText>
+                        <h:inputText id="lastname">
+                            <f:validator validatorId="textInputValidator"></f:validator>
+                        </h:inputText>
+                        <h:message for="lastname" errorStyle="color:red"/>
                     </div>
 
                     <div class="row col s6 offset-s2">
                         <p>Adress</p>
-                    <h:inputText></h:inputText>
+                        <h:inputText id="address">
+                            <f:validator validatorId="addressValidator"></f:validator>
+                        </h:inputText>
+                        <h:message for="address" errorStyle="color:red"/>
                     </div>
 
                     <div class="row col s6 offset-s2">
                         <p>Postnummer</p>
-                    <h:inputText></h:inputText>
+                        <h:inputText id="zipcode">
+                            <f:validator validatorId="zipCodeValidator"></f:validator>
+                        </h:inputText>
+                        <h:message for="zipcode" errorStyle="color:red"/>
                     </div>
 
                     <div class="row col s6 offset-s2">
                         <p>Postort</p>
-                    <h:inputText></h:inputText>
+                        <h:inputText id="postort">
+                            <f:validator validatorId="textInputValidator"></f:validator>
+                        </h:inputText>
+                        <h:message for="postort" errorStyle="color:red"/>
                     </div>
                     
                     <div class="row col s6 offset-s2">
                         <p>Stad</p>
-                    <h:inputText></h:inputText>
+                        <h:inputText id="town">
+                            <f:validator validatorId="textInputValidator"></f:validator>
+                        </h:inputText>
+                        <h:message for="town" errorStyle="color:red"/>
                     </div>
                     
                     <div class="row col s6 offset-s2">
                         <p>Land</p>
-                    <h:inputText></h:inputText>
+                        <h:inputText id="country">
+                            <f:validator validatorId="textInputValidator"></f:validator>
+                        </h:inputText>
+                        <h:message for="country" errorStyle="color:red"/>
                     </div>
 
                     <div class="row col s6 offset-s2">
                         <p>E-post</p>
-                    <h:inputText></h:inputText>
+                        <h:inputText id="email">
+                            <f:validator validatorId="emailValidator"></f:validator>
+                        </h:inputText>
+                        <h:message for="email" errorStyle="color:red"/>
                     </div>
 
                     <div class="row col s6 offset-s2">
                         <p>Lösenord</p>
-                    <h:inputText></h:inputText>
+                        <h:inputSecret id="password">
+                            <f:validator validatorId="passwordValidator"></f:validator>
+                        </h:inputSecret>
+                        <h:message for="password" errorStyle="color:red"/>
                     </div>
 
                     <div class="row col s6 offset-s2">
                         <p>Ange lösenord igen</p>
-                        <h:inputText></h:inputText>
+                        <h:inputSecret id="password2"></h:inputSecret>
+                        <h:message for="password2" errorStyle="color:red"/>
                     </div>
 
                     <div class="row col s6 offset-s2">

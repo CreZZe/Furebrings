@@ -26,7 +26,9 @@
                     <ul id="nav-mobile" class="right hide-on-med-and-down" style="display: inline">
                         <f:view>
                             <h:form>
-                                <li><h:inputText value="sökfält" class="black-text"></h:inputText></li>
+                                <li><h:inputText value="sökfält" class="black-text">
+                                        
+                                    </h:inputText></li>
                                 <li><i class="fas fa-search black-text"></i></li>
                                 <li><h:commandLink class="black-text">Kundvagn</h:commandLink></li>
                                 <li><h:commandLink class="black-text">logga in/konto</h:commandLink></li>
@@ -40,10 +42,18 @@
                     <ul class="cat">
                         <f:view>
                             <h:form>
-                                <li><h:commandButton value="Kategori 1" class="btn blue"></h:commandButton></li>
-                                <li><h:commandButton value="Kategori 2" class="btn blue"></h:commandButton></li>
-                                <li><h:commandButton value="Kategori 3" class="btn blue"></h:commandButton></li>
-                                <li><h:commandButton value="Kategori 4" class="btn blue"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 1" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
+                                <li><h:commandButton value="Kategori 2" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
+                                <li><h:commandButton value="Kategori 3" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
+                                <li><h:commandButton value="Kategori 4" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
                             </h:form>
                         </f:view>
                     </ul>
@@ -57,7 +67,10 @@
                 <h:form>
                     <div class="row col s6 offset-s2">
                         <p>mail</p>
-                        <h:inputText class="input-field col s6"></h:inputText>
+                        <h:inputText class="input-field col s6" id="email">
+                            <f:validator validatorId="emailValidator"></f:validator>
+                        </h:inputText>
+                        <h:message for="email" errorStyle="color:red"/>
                     </div>
                     
                     <div class="row col s6 offset-s2">
@@ -71,7 +84,9 @@
                     
                     <div class="row col s6 offset-s2">
                         <p>Har du inget konto?</p>
-                        <h:commandButton value="Skapa konto" class="btn blue" action="signup"></h:commandButton>
+                        <h:commandButton value="Skapa konto" class="btn blue" action="signup">
+                            <f:param name="skipValidator" value="true" />
+                        </h:commandButton>
                     </div>
                 </h:form>
             </f:view>    
