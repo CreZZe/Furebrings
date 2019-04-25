@@ -15,6 +15,17 @@
                 <h:inputText value="#{controller.mail}"></h:inputText>
                 <h:inputSecret value="#{controller.pass}"></h:inputSecret>
                 <h:commandButton value="Create Account" action="#{controller.addAccount}"></h:commandButton>
+                <br />
+                <br />
+                fname<h:inputText value="#{controller.fname}"></h:inputText>
+                ename<h:inputText value="#{controller.ename}"></h:inputText>
+                number<h:inputText value="#{controller.phoneNumber}"></h:inputText>
+                addres<h:inputText value="#{controller.address}"></h:inputText>
+                postalcode<h:inputText value="#{controller.postalCode}"></h:inputText>
+                city<h:inputText value="#{controller.city}"></h:inputText>
+                country<h:inputText value="#{controller.country}"></h:inputText>
+                <h:commandButton value="Create Account" action="#{controller.addCustomerInformation}"></h:commandButton>
+                <h:commandButton value="Create Account with Customer Information" action="#{controller.addAccountWithCustomerInformation}"></h:commandButton>
             </h:form>
         </f:view>
     </h:body>
