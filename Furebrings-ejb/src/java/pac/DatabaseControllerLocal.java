@@ -18,5 +18,9 @@ public interface DatabaseControllerLocal {
     boolean addCustomerInformation(Customer cust, String mail);
 
     boolean addAccountWithCustomerInformation(Account acc);
+
+    String checkLogin(Account acc);
+
+    String getAccountRole();
     
 }

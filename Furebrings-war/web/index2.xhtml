@@ -26,6 +26,8 @@
                 country<h:inputText value="#{controller.country}"></h:inputText>
                 <h:commandButton value="Create Account" action="#{controller.addCustomerInformation}"></h:commandButton>
                 <h:commandButton value="Create Account with Customer Information" action="#{controller.addAccountWithCustomerInformation}"></h:commandButton>
+                <h:commandButton value="Check Login" action="#{controller.login}"></h:commandButton>
+                <h:commandButton value="Get Role of Logged In User" action="#{controller.dbRole}"></h:commandButton>
             </h:form>
         </f:view>
     </h:body>

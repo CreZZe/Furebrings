@@ -127,7 +127,7 @@ public class Controller implements Serializable {
     }
     
     public void addAccount() {
-        acc = new Account(mail, pass, "Vanlig", null);
+        acc = new Account(mail, pass, "regular", null);
         databaseController.addAccount(acc);
     }
     
@@ -138,8 +138,24 @@ public class Controller implements Serializable {
     
     public void addAccountWithCustomerInformation() {
         cust = new Customer(fname, ename, phoneNumber, address, postalCode, city, country, 0);
-        acc = new Account(mail, pass, "Vanlig", cust);
+        acc = new Account(mail, pass, "regular", cust);
         databaseController.addAccountWithCustomerInformation(acc);
+    }
+    
+    public void login() {
+        acc = new Account(mail, pass);
+        String str;
+        if ((str = databaseController.checkLogin(acc)) != null) {
+            /*
+                if str == customer --> Inloggningen gick igenom, vanlig eller premiumkund inloggad
+                if str == admin --> Inloggningen gick igenom, admin inloggad
+                if str == null --> Inloggningen lyckades inte, ingen inloggad
+            */
+        }
+    }
+    
+    public void dbRole() {
+        fname = databaseController.getAccountRole();
     }
     
     public void test() {
@@ -168,7 +184,7 @@ public class Controller implements Serializable {
         
         cust.setOrders(orders);
         
-        acc = new Account("224Mikael@gmail.com", "asd123", "Premium", cust);
+        acc = new Account("224Mikael@gmail.com", "asd123", "premium", cust);
         addCustomer();
     }
 }

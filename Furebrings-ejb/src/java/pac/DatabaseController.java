@@ -17,6 +17,8 @@ public class DatabaseController implements DatabaseControllerLocal {
     @PersistenceContext(unitName = "Furebrings-ejbPU")
     private EntityManager em;
 
+    private Account accountDB;
+    
     public void persist(Object object) {
         em.persist(object);
     }
@@ -74,9 +76,37 @@ public class DatabaseController implements DatabaseControllerLocal {
             return false;
         }
     }
-    
-    
-    
+
+    @Override
+    public String checkLogin(Account acc) {
+        Query q = em.createQuery("SELECT a FROM Account a WHERE a.mail =:mail AND a.pass =:pass");
+        q.setParameter("mail", acc.getMail());
+        q.setParameter("pass", acc.getPass());
+        try {
+            Account accDB = (Account) q.getSingleResult();
+            
+            if (accDB != null) {
+                accountDB = accDB;
+                String role = accDB.getAccRole();
+                System.out.println(accDB.getAccRole());
+                
+                if (role.equals("regular") || role.equals("premium"))
+                    return "customer";
+                else if (role.equals("admin"))
+                    return "admin"; 
+            }
+        }
+        catch (Exception e) {
+            return null;
+        }
+        
+        return null;
+    }
+
+    @Override
+    public String getAccountRole() {
+        return accountDB.getAccRole();
+    }
     
     
 }
