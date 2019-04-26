@@ -1,0 +1,21 @@
+.cat li {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.catbox {
+    display: inline-block;
+}
+
+.width {
+    text-align: center;
+}
+
+.catheader {
+    background-color: blue;
+}
+
+nav {
+    border-bottom: 4px black solid;
+}

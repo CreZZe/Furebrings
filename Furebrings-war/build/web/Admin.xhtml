@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+         <!-- Navigation start -->
+        <div id="navigation">
+            <nav>
+                <div class="nav-wrapper white">
+                    <h:graphicImage></h:graphicImage>
+                    <span class="brand-logo black-text">Cindys Cykelcenter</span>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down" style="display: inline">
+                        <f:view>
+                            <h:form>
+                                <li><h:inputText value="sökfält" class="black-text">
+                                         
+                                    </h:inputText></li>
+                                <li><i class="fas fa-search black-text"></i></li>
+                                <li><h:commandLink class="black-text">Kundvagn</h:commandLink></li>
+                                <li><h:commandLink class="black-text">logga in/konto</h:commandLink></li>
+                            </h:form>
+                        </f:view>
+                    </ul>
+                </div>
+            </nav>
+            <div class="width">
+                <div class="row catbox">
+                    <ul class="cat">
+                        <f:view>
+                            <h:form>
+                                <li><h:commandButton value="Kategori 1" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
+                                <li><h:commandButton value="Kategori 2" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
+                                <li><h:commandButton value="Kategori 3" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
+                                <li><h:commandButton value="Kategori 4" class="btn blue">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton></li>
+                            </h:form>
+                        </f:view>
+                    </ul>
+                </div>    
+            </div>
+        </div>
+        <!-- Navigation end -->
+        
+        <h2>This is the admin page</h2>
+    </h:body>
+</html>
+
