@@ -23,7 +23,7 @@ public class AddressValidator implements Validator{
         
         String str = (String)value;        
         
-        if(!str.matches("([a-zA-Zå-öÅ-Ö]){3,20}([ ])([0-9]){1,4}")){
+        if(!str.matches("([a-zA-Zå-öÅ-Ö]){3,20}([ ])([0-9]){1,4}([a-zA-Zå-öÅ-Ö])?")){
             String message = "The Address is in an invalid format. ";
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }

@@ -26,6 +26,11 @@ public class Account implements Serializable {
     public Account() {
     }
 
+    public Account(String mail, String pass) {
+        this.mail = mail;
+        this.pass = pass;
+    }
+
     public Account(String mail, String pass, String accRole, Customer customer) {
         this.mail = mail;
         this.pass = pass;

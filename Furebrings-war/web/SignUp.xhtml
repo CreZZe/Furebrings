@@ -61,6 +61,12 @@
             </div>
         </div>
         <!-- Navigation end -->
+        
+        
+        
+        
+        
+        
         <div class="row">
             <f:view>
                 <h:form>
@@ -70,7 +76,7 @@
 
                     <div class="row col s6 offset-s2">
                         <p>Förnamn</p>
-                        <h:inputText id="firstname">
+                        <h:inputText id="firstname" value="#{controller.fname}">
                             <f:validator validatorId="textInputValidator"></f:validator>
                         </h:inputText>
                         <h:message for="firstname" errorStyle="color:red"/>
@@ -78,7 +84,7 @@
 
                     <div class="row col s6 offset-s2">
                         <p>Efternamn</p>
-                        <h:inputText id="lastname">
+                        <h:inputText id="lastname" value="#{controller.ename}">
                             <f:validator validatorId="textInputValidator"></f:validator>
                         </h:inputText>
                         <h:message for="lastname" errorStyle="color:red"/>
@@ -86,7 +92,7 @@
 
                     <div class="row col s6 offset-s2">
                         <p>Adress</p>
-                        <h:inputText id="address">
+                        <h:inputText id="address" value="#{controller.address}">
                             <f:validator validatorId="addressValidator"></f:validator>
                         </h:inputText>
                         <h:message for="address" errorStyle="color:red"/>
@@ -94,23 +100,15 @@
 
                     <div class="row col s6 offset-s2">
                         <p>Postnummer</p>
-                        <h:inputText id="zipcode">
+                        <h:inputText id="zipcode" value="#{controller.postalCode}">
                             <f:validator validatorId="zipCodeValidator"></f:validator>
                         </h:inputText>
                         <h:message for="zipcode" errorStyle="color:red"/>
                     </div>
-
-                    <div class="row col s6 offset-s2">
-                        <p>Postort</p>
-                        <h:inputText id="postort">
-                            <f:validator validatorId="textInputValidator"></f:validator>
-                        </h:inputText>
-                        <h:message for="postort" errorStyle="color:red"/>
-                    </div>
                     
                     <div class="row col s6 offset-s2">
                         <p>Stad</p>
-                        <h:inputText id="town">
+                        <h:inputText id="town" value="#{controller.city}">
                             <f:validator validatorId="textInputValidator"></f:validator>
                         </h:inputText>
                         <h:message for="town" errorStyle="color:red"/>
@@ -118,15 +116,23 @@
                     
                     <div class="row col s6 offset-s2">
                         <p>Land</p>
-                        <h:inputText id="country">
+                        <h:inputText id="country" value="#{controller.country}">
                             <f:validator validatorId="textInputValidator"></f:validator>
                         </h:inputText>
                         <h:message for="country" errorStyle="color:red"/>
                     </div>
+                    
+                    <div class="row col s6 offset-s2">
+                        <p>E-post</p>
+                        <h:inputText id="nummbber" value="#{controller.phoneNumber}">
+                            <f:validator validatorId="telephoneNumberValidator"></f:validator>
+                        </h:inputText>
+                        <h:message for="nummbber" errorStyle="color:red"/>
+                    </div>
 
                     <div class="row col s6 offset-s2">
                         <p>E-post</p>
-                        <h:inputText id="email">
+                        <h:inputText id="email" value="#{controller.mail}">
                             <f:validator validatorId="emailValidator"></f:validator>
                         </h:inputText>
                         <h:message for="email" errorStyle="color:red"/>
@@ -134,7 +140,7 @@
 
                     <div class="row col s6 offset-s2">
                         <p>Lösenord</p>
-                        <h:inputSecret id="password">
+                        <h:inputSecret id="password" value="#{controller.pass}">
                             <f:validator validatorId="passwordValidator"></f:validator>
                         </h:inputSecret>
                         <h:message for="password" errorStyle="color:red"/>
@@ -147,12 +153,11 @@
                     </div>
 
                     <div class="row col s6 offset-s2">
-                        <h:commandButton value="Skapa konto"></h:commandButton>
+                        <h:commandButton value="Skapa konto" action="#{controller.addAccountWithCustomerInformation()}"></h:commandButton>
                     </div>
                 </h:form>
             </f:view>
         </div>
-        
     </h:body>
 </html>
 
