@@ -17,11 +17,13 @@ public class OrderDetails implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String product; //SKA EGENTLIGEN VARA PRODUCT
     private int quantity;
 
     @ManyToOne(cascade=PERSIST)
     private Orders order;
+    
+    @ManyToOne(cascade=PERSIST)
+    private Products product;
     
     public Long getId() {
         return id;
@@ -34,7 +36,7 @@ public class OrderDetails implements Serializable {
     public OrderDetails() {
     }
 
-    public OrderDetails(String product, int quantity, Orders order) {
+    public OrderDetails(Products product, int quantity, Orders order) {
         this.product = product;
         this.quantity = quantity;
         this.order = order;
@@ -48,11 +50,11 @@ public class OrderDetails implements Serializable {
         this.order = order;
     }
 
-    public String getProduct() {
+    public Products getProduct() {
         return product;
     }
 
-    public void setProduct(String product) {
+    public void setProduct(Products product) {
         this.product = product;
     }
 
