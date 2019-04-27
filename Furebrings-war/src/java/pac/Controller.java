@@ -142,16 +142,14 @@ public class Controller implements Serializable {
         databaseController.addAccountWithCustomerInformation(acc);
     }
     
-    public void login() {
+    public String login() {
         acc = new Account(mail, pass);
-        String str;
-        if ((str = databaseController.checkLogin(acc)) != null) {
             /*
                 if str == customer --> Inloggningen gick igenom, vanlig eller premiumkund inloggad
                 if str == admin --> Inloggningen gick igenom, admin inloggad
                 if str == null --> Inloggningen lyckades inte, ingen inloggad
             */
-        }
+        return databaseController.checkLogin(acc);
     }
     
     public void dbRole() {

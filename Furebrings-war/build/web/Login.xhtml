@@ -67,7 +67,7 @@
                 <h:form>
                     <div class="row col s6 offset-s2">
                         <p>mail</p>
-                        <h:inputText class="input-field col s6" id="email">
+                        <h:inputText class="input-field col s6" id="email" value="#{controller.mail}">
                             <f:validator validatorId="emailValidator"></f:validator>
                         </h:inputText>
                         <h:message for="email" errorStyle="color:red"/>
@@ -75,21 +75,28 @@
                     
                     <div class="row col s6 offset-s2">
                         <p>lösenord</p>
-                        <h:inputText class="input-field col s6"></h:inputText>
+                        <h:inputText class="input-field col s6" value="#{controller.pass}"></h:inputText>
                     </div>
-                    
                     <div class="row col s6 offset-s2">
-                        <h:commandButton value="Logga in" ></h:commandButton>
+                        <h:commandButton value="Logga in" action="#{controller.login()}"></h:commandButton>
                     </div>
+                   
+                </h:form>
+            </f:view>    
+            <f:view>
+                <h:form>
                     
-                    <div class="row col s6 offset-s2">
+                    
+                    
+                     <div class="row col s6 offset-s2">
                         <p>Har du inget konto?</p>
                         <h:commandButton value="Skapa konto" class="btn blue" action="signup">
                             <f:param name="skipValidator" value="true" />
                         </h:commandButton>
                     </div>
                 </h:form>
-            </f:view>    
+            </f:view>
+
         </div>
     </h:body>
 </html>
