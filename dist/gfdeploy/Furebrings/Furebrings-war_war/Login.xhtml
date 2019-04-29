@@ -75,7 +75,11 @@
                     
                     <div class="row col s6 offset-s2">
                         <p>lösenord</p>
-                        <h:inputText class="input-field col s6" value="#{controller.pass}"></h:inputText>
+                        <h:inputSecret class="input-field col s6" value="#{controller.pass}">
+                            <f:validator validatorId="passwordValidator"></f:validator>
+                        </h:inputSecret>>
+                        <h:message for="password" errorStyle="color:red"/>
+                        
                     </div>
                     <div class="row col s6 offset-s2">
                         <h:commandButton value="Logga in" action="#{controller.login()}"></h:commandButton>
