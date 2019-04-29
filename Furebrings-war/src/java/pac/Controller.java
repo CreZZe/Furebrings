@@ -1,9 +1,11 @@
 package pac;
 
 import entities.Account;
+import entities.Categories;
 import entities.Customer;
 import entities.OrderDetails;
 import entities.Orders;
+import entities.Products;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -162,9 +164,16 @@ public class Controller implements Serializable {
         Orders order1 = new Orders(cust);
         Orders order2 = new Orders(cust);
         
-        OrderDetails det1 = new OrderDetails("Leksak", 4, order1);
-        OrderDetails det2 = new OrderDetails("Gunga", 2, order1);
-        OrderDetails det3 = new OrderDetails("Fotboll", 5, order2);
+        Categories cat1 = new Categories("Leksak");
+        Categories cat2 = new Categories("Cykel");
+        
+        Products prod1 = new Products("leksaksbil", 54, 4, "fin leksaksbil", cat1);
+        Products prod2 = new Products("snabb cykel", 2000, 20, "en snabb cykel", cat2);
+        Products prod3 = new Products("långsam cykel", 1200, 3, "en långsam cykel", cat2);
+        
+        OrderDetails det1 = new OrderDetails(prod1, 4, order1);
+        OrderDetails det2 = new OrderDetails(prod2, 2, order1);
+        OrderDetails det3 = new OrderDetails(prod3, 5, order2);
         
         List<OrderDetails> details1 = new ArrayList<>();
         details1.add(det1);
@@ -184,5 +193,7 @@ public class Controller implements Serializable {
         
         acc = new Account("224Mikael@gmail.com", "asd123", "premium", cust);
         addCustomer();
+
+        // regular - premium - admin
     }
 }

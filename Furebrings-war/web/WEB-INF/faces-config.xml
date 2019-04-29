@@ -4,15 +4,24 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <navigation-rule>
+        
+        
         <from-view-id>/index.xhtml</from-view-id>
+        
+        
         <navigation-case>
             <from-outcome>login</from-outcome>
             <to-view-id>/Login.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     
+    
     <navigation-rule>
+        
+        
         <from-view-id>Login.xhtml</from-view-id>
+        
+        
         <navigation-case>
             <from-outcome>customer</from-outcome>
             <to-view-id>/User.xhtml</to-view-id>
@@ -21,7 +30,6 @@
             <from-outcome>signup</from-outcome>
             <to-view-id>/SignUp.xhtml</to-view-id>
         </navigation-case>
-        
         <navigation-case>
             <from-outcome>invalid</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
@@ -29,6 +37,17 @@
         <navigation-case>
             <from-outcome>admin</from-outcome>
             <to-view-id>/Admin.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    
+    <navigation-rule>
+        
+        
+        <from-view-id>/SignUp.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>login</from-action>
+            <to-view-id>/Login.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

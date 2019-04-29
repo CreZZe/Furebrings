@@ -68,12 +68,20 @@ public class DatabaseController implements DatabaseControllerLocal {
 
     @Override
     public boolean addAccountWithCustomerInformation(Account acc) {
+        Query q = em.createQuery("SELECT a FROM Account a WHERE a.mail =:mail");
+        q.setParameter("mail", acc.getMail());
         try {
-            persist(acc);
-            return true;
+            Account accDB = (Account) q.getSingleResult();
+            return false;
         }
         catch (Exception e) {
-            return false;
+            try {
+                persist(acc);
+                return true;
+            }
+            catch (Exception ex) {
+                return false;
+            }
         }
     }
 
