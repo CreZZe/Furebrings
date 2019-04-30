@@ -272,7 +272,7 @@ public class DatabaseController implements DatabaseControllerLocal {
         cartQuantityDecrement(p2);
         cartQuantityDecrement(p2);*/
         
-        cartQuantityDecrement(p3);
+        //cartQuantityDecrement(p3);
         cartQuantityDecrement(p3);
         cartQuantityDecrement(p3);
         cartQuantityDecrement(p3);
