@@ -9,7 +9,7 @@
     
     
     <navigation-rule>
-        <from-view-id>Login.xhtml</from-view-id>
+        <from-view-id>/Login.xhtml</from-view-id>
         
         <navigation-case>
             <from-outcome>customer</from-outcome>

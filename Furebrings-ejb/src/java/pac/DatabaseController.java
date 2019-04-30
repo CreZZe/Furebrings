@@ -165,7 +165,7 @@ public class DatabaseController implements DatabaseControllerLocal {
      */
     @Override
     public boolean cartQuantityDecrement(Products prod) {
-        OrderDetails item;
+        /*OrderDetails item;
         for (int i = 0; i < cartProductRow.size(); i++) {
             item = cartProductRow.get(i);
             if (item.getProduct().getName().equals(prod.getName())) {
@@ -174,21 +174,21 @@ public class DatabaseController implements DatabaseControllerLocal {
                 
                 if (item.getQuantity() == 0)
                     cartProductRow.remove(i);
-
+                
+                //return true;
+            }
+        }*/
+        
+        for (OrderDetails item : cartProductRow) {
+            if (item.getProduct().getName().equals(prod.getName())) {
+                item.setQuantity(item.getQuantity() - 1);
+                
+                if (item.getQuantity() == 0)
+                    cartProductRow.remove(item);
                 
                 return true;
             }
         }
-        
-        /*System.out.println("HÄR BÖRJAR EN DECREMENT");
-        int i = 0;
-        for (OrderDetails it : cartProductRow) {
-            System.out.println(cartProductRow.indexOf(it) + " " + it.getProduct().getName());
-            System.out.println("Index 1: " + cartProductRow.get(1).getProduct().getName());
-            i++;
-        }
-        System.out.println("HÄR SLUTAR EN DECREMENT");*/
-        
         
         return false;
     }
@@ -209,51 +209,6 @@ public class DatabaseController implements DatabaseControllerLocal {
     @Override
     public List<CartProduct> getProductsFromCart() {
         List<CartProduct> cartProducts = new ArrayList<>();
-        
-        //Tester för att lägga in produkter i varukorgen
-        Products p1 = new Products("Gaffel", 12, 10, "Fin gaffel", null);
-        Products p2 = new Products("Sked", 8, 5, "Fin sked", null);
-        Products p3 = new Products("Kniv", 10, 8, "En vass kniv", null);
-
-        addProductToCart(p1, 5);
-        addProductToCart(p2, 5);
-        addProductToCart(p3, 5);
-        
-//        cartQuantityIncrement(p1);
-//        cartQuantityIncrement(p1);
-//        cartQuantityIncrement(p1);
-//        cartQuantityIncrement(p1);
-//        cartQuantityIncrement(p1);
-//        cartQuantityIncrement(p1);
-//        cartQuantityIncrement(p1);
-//
-//        cartQuantityIncrement(p2);
-//        cartQuantityIncrement(p2);
-//        cartQuantityIncrement(p2);
-//        cartQuantityIncrement(p2);
-//        cartQuantityIncrement(p2);
-//        cartQuantityIncrement(p2);
-//        
-//        cartQuantityIncrement(p3);
-//        cartQuantityIncrement(p3);
-//        cartQuantityIncrement(p3);
-//        cartQuantityIncrement(p3);
-//        cartQuantityIncrement(p3);
-//
-//        cartQuantityDecrement(p2);
-//        cartQuantityDecrement(p2);
-//        cartQuantityDecrement(p2);
-//        cartQuantityDecrement(p2);
-//        cartQuantityDecrement(p2);
-//        
-//        cartQuantityDecrement(p3);
-//        cartQuantityDecrement(p3);
-//        cartQuantityDecrement(p3);
-//        cartQuantityDecrement(p3);
-//        cartQuantityDecrement(p3);
-//        cartQuantityDecrement(p3);
-//        cartQuantityDecrement(p3);
-//        cartQuantityDecrement(p3);
 
         for (OrderDetails od : cartProductRow) {
             CartProduct prod = new CartProduct(od.getProduct().getName(), 
