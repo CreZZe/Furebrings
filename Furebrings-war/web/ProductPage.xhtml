@@ -66,6 +66,19 @@
             <f:view>
                 <h:form>
                     <h:commandButton class="btn" action="item" value="produkt 1"></h:commandButton>
+                    <h:commandButton class="btn" action="#{productController.fetchAllProducts()}" value="Show All Products"></h:commandButton>
+                    <h:dataTable value="#{productController.products}" var="Product"
+                                 border="5" bgcolor="pink" cellpadding="10" rendered="#{productController.products.size() > 0}">
+                        <f:facet name="header">Authors</f:facet>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            <h:outputText id="o1" value="#{Product.name}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Category</f:facet>
+                            <h:outputText id="o2" value="#{Product.category.name}"></h:outputText>
+                        </h:column>
+                    </h:dataTable>
                 </h:form>
             </f:view>
 
