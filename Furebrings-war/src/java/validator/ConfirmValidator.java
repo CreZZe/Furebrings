@@ -23,7 +23,7 @@ public class ConfirmValidator implements Validator{
         }
         
         Map map = context.getExternalContext().getRequestParameterMap();
-        String passwordText = (String)map.get("form:password2");
+        String passwordText = (String)map.get("form:password");
         String confirmPassword = (String)value;        
         
         if(!passwordText.equals(confirmPassword)){

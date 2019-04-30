@@ -43,8 +43,9 @@ public class CartController implements Serializable {
     
     
     
-    public void productsFromDB() {
+    public String productsFromDB() {
         cartProducts = databaseController.getProductsFromCart();
+        return "cart";
     }
     /*
         Jag måste ha en knapp för att kunna calla på metoden för att hämta

@@ -55,7 +55,7 @@
         </navigation-case>
         
         <navigation-case>
-            <from-action>cart</from-action>
+            <from-outcome>cart</from-outcome>
             <to-view-id>/Cart.xhtml</to-view-id>
         </navigation-case>
         

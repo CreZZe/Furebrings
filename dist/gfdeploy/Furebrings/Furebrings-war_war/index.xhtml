@@ -37,7 +37,7 @@
                                         
                                     </h:inputText></li>
                                 <li><i class="fas fa-search black-text"></i></li>
-                                <li><h:commandLink class="black-text" action="cart">Kundvagn</h:commandLink></li>
+                                <li><h:commandLink class="black-text" action="#{cartController.productsFromDB}">Kundvagn</h:commandLink></li>
                                 <li><h:commandLink class="black-text" action="login">logga in/konto</h:commandLink></li>
                             </h:form>
                         </f:view>
@@ -87,30 +87,6 @@
             <h:graphicImage></h:graphicImage>
             <h:graphicImage></h:graphicImage>
         </div>
-        
-        
-        
-        <f:view>
-            <h:form>
-                <h:commandButton value="Klick" action="#{cartController.productsFromDB}"></h:commandButton>
-                <h:dataTable value="#{cartController.cartProducts}" var="prod">
-                    <h:column>
-                        <f:facet name="header">Product</f:facet>
-                        #{prod.name}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Price</f:facet>
-                        #{prod.cost}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Quantity</f:facet>
-                        #{prod.quantity}
-                    </h:column>
-                </h:dataTable>
-            </h:form>
-        </f:view>
-
-        
         
         <footer class="page-footer blue">
           <div class="footer-copyright">
