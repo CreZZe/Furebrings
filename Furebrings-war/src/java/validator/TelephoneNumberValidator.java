@@ -24,7 +24,7 @@ public class TelephoneNumberValidator implements Validator{
         String str = (String)value;        
         
         if(!str.matches("((07)|(\\+467))([0-9]{8})")){
-            String message = "Invalid Telephone  number";                        //FacesContext.getCurrentInstance().addMessage("form:exception", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+            String message = "Telefonnummer ska börja med 07 eller +467 och sedan 8 siffror.";                        //FacesContext.getCurrentInstance().addMessage("form:exception", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }
     }

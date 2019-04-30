@@ -23,7 +23,7 @@ public class SearchValidator implements Validator{
         
         String str = (String)value;    
         
-        if(!str.matches( "([a-zA-Zå-öÅ-Ö])+(([ ])([a-zA-Zå-öÅ-Ö])+)*")){
+        if(!str.matches( "([a-zA-ZåäöÅÄÖ])+(([ ])([a-zA-ZåäöÅÄÖ])+)*")){
             String message = "Invalid Search Text";            
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }

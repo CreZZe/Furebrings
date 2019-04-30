@@ -22,9 +22,9 @@ public class ZipCodeValidator implements Validator{
         }
         
         String str = (String)value;        
-        
-        if(!str.matches("([0-9]){5}")){
-            String message = "Invalid Zip Code";                        //FacesContext.getCurrentInstance().addMessage("form:exception", new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+
+        if(!str.matches("[1-9][0-7][0-9]{3}")){
+            String message = "Postnummer ska vara 5 siffror.";                        
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }
     }
