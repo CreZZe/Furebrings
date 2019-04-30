@@ -18,20 +18,26 @@
     <h:body>
         
         <!-- Navigation start -->
-        <div id="navigation">
+        <div id="navigation" class="row">
             <nav>
                 <div class="nav-wrapper white">
-                    <h:graphicImage></h:graphicImage>
-                    <span class="brand-logo black-text">Cindys Cykelcenter</span>
+                        <h:graphicImage></h:graphicImage>
+                            <f:view>
+                                <h:form class="brand-logo">
+                                    <span><h:commandLink class="black-text" action="index">Cindys Cykelcenter</h:commandLink></span>
+                                </h:form>
+                            </f:view>
+
+                    
                     <ul id="nav-mobile" class="right hide-on-med-and-down" style="display: inline">
                         <f:view>
-                            <h:form>
+                            <h:form class="">
                                 <li><h:inputText value="sökfält" class="black-text">
                                         
                                     </h:inputText></li>
                                 <li><i class="fas fa-search black-text"></i></li>
-                                <li><h:commandLink class="black-text">Kundvagn</h:commandLink></li>
-                                <li><h:commandLink class="black-text">logga in/konto</h:commandLink></li>
+                                <li><h:commandLink class="black-text" action="cart">Kundvagn</h:commandLink></li>
+                                <li><h:commandLink class="black-text" action="login">logga in/konto</h:commandLink></li>
                             </h:form>
                         </f:view>
                     </ul>
@@ -42,18 +48,10 @@
                     <ul class="cat">
                         <f:view>
                             <h:form>
-                                <li><h:commandButton value="Kategori 1" class="btn blue">
-                                        <f:param name="skipValidator" value="true" />
-                                    </h:commandButton></li>
-                                <li><h:commandButton value="Kategori 2" class="btn blue">
-                                        <f:param name="skipValidator" value="true" />
-                                    </h:commandButton></li>
-                                <li><h:commandButton value="Kategori 3" class="btn blue">
-                                        <f:param name="skipValidator" value="true" />
-                                    </h:commandButton></li>
-                                <li><h:commandButton value="Kategori 4" class="btn blue">
-                                        <f:param name="skipValidator" value="true" />
-                                    </h:commandButton></li>
+                                <li><h:commandButton value="Kategori 1" class="btn blue" action="productpage"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 2" class="btn blue" action="productpage"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 3" class="btn blue" action="productpage"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 4" class="btn blue" action="productpage"></h:commandButton></li>
                             </h:form>
                         </f:view>
                     </ul>
@@ -77,7 +75,7 @@
                         <p>lösenord</p>
                         <h:inputSecret class="input-field col s6" value="#{controller.pass}">
                             <f:validator validatorId="passwordValidator"></f:validator>
-                        </h:inputSecret>>
+                        </h:inputSecret>
                         <h:message for="password" errorStyle="color:red"/>
                         
                     </div>
