@@ -27,6 +27,7 @@ public class Controller implements Serializable {
     private Account acc;
     private String mail;
     private String pass;
+    private String pass2;
     private String accRole;
     
     
@@ -55,6 +56,15 @@ public class Controller implements Serializable {
     public String getPass() {
         return pass;
     }
+
+    public String getPass2() {
+        return pass2;
+    }
+
+    public void setPass2(String pass2) {
+        this.pass2 = pass2;
+    }
+    
 
     public void setPass(String pass) {
         this.pass = pass;
@@ -144,16 +154,14 @@ public class Controller implements Serializable {
         databaseController.addAccountWithCustomerInformation(acc);
     }
     
-    public void login() {
+    public String login() {
         acc = new Account(mail, pass);
-        String str;
-        if ((str = databaseController.checkLogin(acc)) != null) {
             /*
                 if str == customer --> Inloggningen gick igenom, vanlig eller premiumkund inloggad
                 if str == admin --> Inloggningen gick igenom, admin inloggad
                 if str == null --> Inloggningen lyckades inte, ingen inloggad
             */
-        }
+        return databaseController.checkLogin(acc);
     }
     
     public void dbRole() {

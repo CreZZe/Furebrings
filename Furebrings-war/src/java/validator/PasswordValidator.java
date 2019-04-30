@@ -24,7 +24,7 @@ public class PasswordValidator implements Validator{
         String str = (String)value;        
         
         if(!str.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\\d]{6,15}$")){
-            String message = "Invalid Password. Password";
+            String message = "Lösenordet ska innehålla minst en versal, en gemen och en siffra och ska vara mellan 6 till 15 tecken.";
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }
     }

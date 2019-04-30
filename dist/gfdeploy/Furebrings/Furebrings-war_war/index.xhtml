@@ -19,19 +19,25 @@
     <h:body>
         
         <!-- Navigation start -->
-        <div id="navigation">
+        <div id="navigation" class="row">
             <nav>
                 <div class="nav-wrapper white">
-                    <h:graphicImage></h:graphicImage>
-                    <span class="brand-logo black-text">Cindys Cykelcenter</span>
+                        <h:graphicImage></h:graphicImage>
+                            <f:view>
+                                <h:form class="brand-logo">
+                                    <span><h:commandLink class="black-text" action="index">Cindys Cykelcenter</h:commandLink></span>
+                                </h:form>
+                            </f:view>
+
+                    
                     <ul id="nav-mobile" class="right hide-on-med-and-down" style="display: inline">
                         <f:view>
-                            <h:form>
+                            <h:form class="">
                                 <li><h:inputText value="sökfält" class="black-text">
                                         
                                     </h:inputText></li>
                                 <li><i class="fas fa-search black-text"></i></li>
-                                <li><h:commandLink class="black-text">Kundvagn</h:commandLink></li>
+                                <li><h:commandLink class="black-text" action="cart">Kundvagn</h:commandLink></li>
                                 <li><h:commandLink class="black-text" action="login">logga in/konto</h:commandLink></li>
                             </h:form>
                         </f:view>
@@ -43,10 +49,10 @@
                     <ul class="cat">
                         <f:view>
                             <h:form>
-                                <li><h:commandButton value="Kategori 1" class="btn blue"></h:commandButton></li>
-                                <li><h:commandButton value="Kategori 2" class="btn blue"></h:commandButton></li>
-                                <li><h:commandButton value="Kategori 3" class="btn blue"></h:commandButton></li>
-                                <li><h:commandButton value="Kategori 4" class="btn blue"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 1" class="btn blue" action="productpage"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 2" class="btn blue" action="productpage"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 3" class="btn blue" action="productpage"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 4" class="btn blue" action="productpage"></h:commandButton></li>
                             </h:form>
                         </f:view>
                     </ul>
@@ -65,10 +71,10 @@
                 <ul class="cat">
                     <f:view>
                         <h:form>
-                            <li><h:commandLink><h3>Snabba cyklar</h3></h:commandLink></li>
-                            <li><h:commandLink><h3>Långsamma cyklar</h3></h:commandLink></li>
-                            <li><h:commandLink><h3>Barncyklar</h3></h:commandLink></li>
-                            <li><h:commandLink><h3>Tantcyklar</h3></h:commandLink></li>
+                            <li><h:commandLink action="productpage"><h3>Snabba cyklar</h3></h:commandLink></li>
+                            <li><h:commandLink action="productpage"><h3>Långsamma cyklar</h3></h:commandLink></li>
+                            <li><h:commandLink action="productpage"><h3>Barncyklar</h3></h:commandLink></li>
+                            <li><h:commandLink action="productpage"><h3>Tantcyklar</h3></h:commandLink></li>
                         </h:form>
                     </f:view>
                 </ul>
@@ -81,6 +87,9 @@
             <h:graphicImage></h:graphicImage>
             <h:graphicImage></h:graphicImage>
         </div>
+        
+        
+        
         <f:view>
             <h:form>
                 <h:commandButton value="Klick" action="#{cartController.productsFromDB}"></h:commandButton>

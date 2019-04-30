@@ -23,12 +23,13 @@ public class EmailValidator implements Validator{
         
         String str = (String)value;       
         
-        if(!str.matches("([a-zA-Z0-9._-]){4,}@{1}([a-zA-Z])+.([a-zA-Z]){2,}")){
-            String message = "The Email Address is in an invalid format.";            
+        //if(!str.matches("([a-zA-Z0-9._-]){4,}@{1}([a-zA-Z])+.([a-zA-Z]){2,}")){
+        if(!str.matches("^[\\w!#%&'/=~`\\*\\+\\?\\{\\}\\^\\$\\-\\|]+(\\.[\\w!#%&'/=~`\\*\\+\\?\\{\\}\\^\\$\\-\\|]+)*@[\\w!#%&'/=~`\\*\\+\\?\\{\\}\\^\\$\\-\\|]+(\\.[\\w!#%&'/=~`\\*\\+\\?\\{\\}\\^\\$\\-\\|]+)*$")){
+            String message = "Ogiltig email.";            
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }
     }
-    
+    // ^[\w!#%&'/=~`\*\+\?\{\}\^\$\-\|]+(\.[\w!#%&'/=~`\*\+\?\{\}\^\$\-\|]+)*@[\w!#%&'/=~`\*\+\?\{\}\^\$\-\|]+(\.[\w!#%&'/=~`\*\+\?\{\}\^\$\-\|]+)*$
     private boolean doValidation(){
         String skipValidator = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("skipValidator");
         if(skipValidator != null && skipValidator.equalsIgnoreCase("true")){

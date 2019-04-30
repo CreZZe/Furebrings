@@ -1,5 +1,6 @@
-package asd;
+package validator;
 
+import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -11,8 +12,8 @@ import javax.faces.validator.ValidatorException;
  *
  * @author isami
  */
-@FacesValidator("searchValidator")
-public class SearchValidator implements Validator{
+@FacesValidator("confirmValidator")
+public class ConfirmValidator implements Validator{
 
     @Override
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
@@ -21,10 +22,12 @@ public class SearchValidator implements Validator{
             return;
         }
         
-        String str = (String)value;    
+        Map map = context.getExternalContext().getRequestParameterMap();
+        String passwordText = (String)map.get("form:password2");
+        String confirmPassword = (String)value;        
         
-        if(!str.matches( "([a-zA-Zå-öÅ-Ö])+(([ ])([a-zA-Zå-öÅ-Ö])+)*")){
-            String message = "Invalid Search Text";            
+        if(!passwordText.equals(confirmPassword)){
+            String message = "Lösenordet stämmer inte.";
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }
     }
@@ -36,4 +39,5 @@ public class SearchValidator implements Validator{
         }
         return true;     
     }
+    
 }

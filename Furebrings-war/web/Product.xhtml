@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"></link>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- CDN path to Fontawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"></link>
+        <!-- Own CSS-file -->
+        <link rel="stylesheet" href="style.css"></link>
+        
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <!-- Navigation start -->
+        <div id="navigation" class="row">
+            <nav>
+                <div class="nav-wrapper white">
+                        <h:graphicImage></h:graphicImage>
+                            <f:view>
+                                <h:form class="brand-logo">
+                                    <span><h:commandLink class="black-text" action="index">Cindys Cykelcenter</h:commandLink></span>
+                                </h:form>
+                            </f:view>
+
+                    
+                    <ul id="nav-mobile" class="right hide-on-med-and-down" style="display: inline">
+                        <f:view>
+                            <h:form class="">
+                                <li><h:inputText value="sökfält" class="black-text">
+                                        
+                                    </h:inputText></li>
+                                <li><i class="fas fa-search black-text"></i></li>
+                                <li><h:commandLink class="black-text" action="cart">Kundvagn</h:commandLink></li>
+                                <li><h:commandLink class="black-text" action="login">logga in/konto</h:commandLink></li>
+                            </h:form>
+                        </f:view>
+                    </ul>
+                </div>
+            </nav>
+            <div class="width">
+                <div class="row catbox">
+                    <ul class="cat">
+                        <f:view>
+                            <h:form>
+                                <li><h:commandButton value="Kategori 1" class="btn blue" action="productpage"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 2" class="btn blue" action="productpage"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 3" class="btn blue" action="productpage"></h:commandButton></li>
+                                <li><h:commandButton value="Kategori 4" class="btn blue" action="productpage"></h:commandButton></li>
+                            </h:form>
+                        </f:view>
+                    </ul>
+                </div>    
+            </div>
+        </div>
+        <!-- Navigation end -->
+        
+        <div class="row">
+            <h1>här ska vi lista produktspecifikationer</h1>
+        </div>
+    </h:body>
+</html>
+
