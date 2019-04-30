@@ -25,7 +25,7 @@ public class TextInputValidator implements Validator{
         
         //if(!str.matches("([a-zA-ZåäöÅÄÖ){1,30}")){
         if(!str.matches("(([a-zA-ZåäöÅÄÖ])+(([ ]|[-])([a-zA-ZåäöÅÄÖ])+)*){1,30}")){
-            String message = "Bara alfabet och mellanslag är tillåtna.Max antal tecken är 30.";                        
+            String message = "Bara alfabet och mellanslag är tillåtna. Max antal tecken är 30.";                        
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }
     }
