@@ -1,5 +1,6 @@
 package pac;
 
+import ejb.AccountFacade;
 import entities.Account;
 import entities.Categories;
 import entities.Customer;
@@ -22,7 +23,12 @@ import javax.ejb.EJB;
 public class Controller implements Serializable {
 
     @EJB
+    private AccountFacade accountFacade;
+
+    @EJB
     private DatabaseControllerLocal databaseController;
+    
+    
 
     private Account acc;
     private String mail;
@@ -134,13 +140,13 @@ public class Controller implements Serializable {
         this.country = country;
     }
     
-    public void addCustomer() {
+    /*public void addCustomer() {
         databaseController.addCustomer(acc);
-    }
+    }*/
     
     public void addAccount() {
         acc = new Account(mail, pass, "regular", null);
-        databaseController.addAccount(acc);
+        accountFacade.register(acc);
     }
     
     public void addCustomerInformation() {
@@ -151,7 +157,7 @@ public class Controller implements Serializable {
     public void addAccountWithCustomerInformation() {
         cust = new Customer(fname, ename, phoneNumber, address, postalCode, city, country, 0);
         acc = new Account(mail, pass, "regular", cust);
-        databaseController.addAccountWithCustomerInformation(acc);
+        accountFacade.register(acc);
     }
     
     public String login() {
@@ -202,7 +208,7 @@ public class Controller implements Serializable {
         cust.setOrders(orders);
         
         acc = new Account("224Mikael@gmail.com", "asd123", "premium", cust);
-        addCustomer();
+        accountFacade.register(acc);
 
         // regular - premium - admin
     }

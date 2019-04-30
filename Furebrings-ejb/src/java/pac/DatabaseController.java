@@ -36,28 +36,6 @@ public class DatabaseController implements DatabaseControllerLocal {
     // "Insert Code > Add Business Method")
 
     @Override
-    public boolean addCustomer(Account acc) {
-        try {
-            persist(acc);
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean addAccount(Account acc) {
-        try {
-            persist(acc);
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
-    }
-
-    @Override
     public boolean addCustomerInformation(Customer cust, String mail) {
         try {
             persist(cust);
@@ -72,25 +50,6 @@ public class DatabaseController implements DatabaseControllerLocal {
         }
         catch (Exception e) {
             return false;
-        }
-    }
-
-    @Override
-    public boolean addAccountWithCustomerInformation(Account acc) {
-        Query q = em.createQuery("SELECT a FROM Account a WHERE a.mail =:mail");
-        q.setParameter("mail", acc.getMail());
-        try {
-            Account accDB = (Account) q.getSingleResult();
-            return false;
-        }
-        catch (Exception e) {
-            try {
-                persist(acc);
-                return true;
-            }
-            catch (Exception ex) {
-                return false;
-            }
         }
     }
 
@@ -136,14 +95,25 @@ public class DatabaseController implements DatabaseControllerLocal {
         
         int sizeBefore = cartProductRow.size();
         
-        for (OrderDetails item : cartProductRow) {
+        for (int i = 0; i < cartProductRow.size(); i++) {
+            OrderDetails item = cartProductRow.get(i);
+            if (item.getProduct().getName().equals(prod.getName())) {
+                if (getQuantity(prod) >= item.getQuantity() + quantity){
+                    item.setQuantity(item.getQuantity() + quantity);
+                    return true;
+                }
+                return false;
+            }
+        }
+        
+        /*for (OrderDetails item : cartProductRow) {
             if (item.getProduct().getName().equals(prod.getName())) {
                 if (getQuantity(prod) >= item.getQuantity() + quantity){
                     item.setQuantity(item.getQuantity() + quantity);
                     return true;
                 }
             }
-        }
+        }*/
         
         cartProductRow.add(new OrderDetails(prod, quantity, order));
         
@@ -163,7 +133,18 @@ public class DatabaseController implements DatabaseControllerLocal {
      */
     @Override
     public boolean cartQuantityIncrement(Products prod) {
-        for (OrderDetails item : cartProductRow) {
+        for (int i = 0; i < cartProductRow.size(); i++) {
+            OrderDetails item = cartProductRow.get(i);
+            if (item.getProduct().getName().equals(prod.getName())) {
+                if (getQuantity(prod) > item.getQuantity()) {
+                    item.setQuantity(item.getQuantity() + 1);
+                    return true;
+                }
+                return false;
+            }
+        }
+        
+        /*for (OrderDetails item : cartProductRow) {
             if (item.getProduct().getName().equals(prod.getName())) {
                 //KONTROLLERA SÅ DET FINNS I LAGER INNAN
                 if (getQuantity(prod) > item.getQuantity()) {
@@ -171,7 +152,7 @@ public class DatabaseController implements DatabaseControllerLocal {
                     return true;
                 }
             }
-        }
+        }*/
         
         return false;
     }
@@ -187,11 +168,10 @@ public class DatabaseController implements DatabaseControllerLocal {
         OrderDetails item;
         for (int i = 0; i < cartProductRow.size(); i++) {
             item = cartProductRow.get(i);
-            if (cartProductRow.get(i).getProduct().getName().equals(prod.getName())) {
+            if (item.getProduct().getName().equals(prod.getName())) {
                 item.setQuantity(item.getQuantity() - 1);
                 
                 
-                // Varför tar den inte bort rätt objekt??
                 if (item.getQuantity() == 0)
                     cartProductRow.remove(i);
 
@@ -200,26 +180,14 @@ public class DatabaseController implements DatabaseControllerLocal {
             }
         }
         
-        /*for (OrderDetails item : cartProductRow) {
-            System.out.println(cartProductRow.indexOf(item) + " " + item.getProduct().getName());
-
-            if (item.getProduct().getName().equals(prod.getName())) {
-                item.setQuantity(item.getQuantity() - 1);
-                
-                
-                // Varför tar den inte bort rätt objekt??
-                if (item.getQuantity() == 0) { 
-                    System.out.println(item.getProduct().getName());
-                    cartProductRow.remove(item);
-                    
-                    for (OrderDetails i : cartProductRow) {
-                        System.out.println(i.getProduct().getName());
-                    }
-                }
-                
-                return true;
-            }
-        }*/
+        /*System.out.println("HÄR BÖRJAR EN DECREMENT");
+        int i = 0;
+        for (OrderDetails it : cartProductRow) {
+            System.out.println(cartProductRow.indexOf(it) + " " + it.getProduct().getName());
+            System.out.println("Index 1: " + cartProductRow.get(1).getProduct().getName());
+            i++;
+        }
+        System.out.println("HÄR SLUTAR EN DECREMENT");*/
         
         
         return false;
@@ -251,32 +219,41 @@ public class DatabaseController implements DatabaseControllerLocal {
         addProductToCart(p2, 5);
         addProductToCart(p3, 5);
         
-        cartQuantityIncrement(p1);
-        cartQuantityIncrement(p1);
-        cartQuantityIncrement(p1);
-        cartQuantityIncrement(p1);
-        cartQuantityIncrement(p1);
-        cartQuantityIncrement(p1);
-        cartQuantityIncrement(p1);
-
-        cartQuantityIncrement(p2);
-        cartQuantityIncrement(p2);
-        cartQuantityIncrement(p2);
-        cartQuantityIncrement(p2);
-        cartQuantityIncrement(p2);
-        cartQuantityIncrement(p2);
-
-        /*cartQuantityDecrement(p2);
-        cartQuantityDecrement(p2);
-        cartQuantityDecrement(p2);
-        cartQuantityDecrement(p2);
-        cartQuantityDecrement(p2);*/
-        
-        //cartQuantityDecrement(p3);
-        cartQuantityDecrement(p3);
-        cartQuantityDecrement(p3);
-        cartQuantityDecrement(p3);
-        cartQuantityDecrement(p3);
+//        cartQuantityIncrement(p1);
+//        cartQuantityIncrement(p1);
+//        cartQuantityIncrement(p1);
+//        cartQuantityIncrement(p1);
+//        cartQuantityIncrement(p1);
+//        cartQuantityIncrement(p1);
+//        cartQuantityIncrement(p1);
+//
+//        cartQuantityIncrement(p2);
+//        cartQuantityIncrement(p2);
+//        cartQuantityIncrement(p2);
+//        cartQuantityIncrement(p2);
+//        cartQuantityIncrement(p2);
+//        cartQuantityIncrement(p2);
+//        
+//        cartQuantityIncrement(p3);
+//        cartQuantityIncrement(p3);
+//        cartQuantityIncrement(p3);
+//        cartQuantityIncrement(p3);
+//        cartQuantityIncrement(p3);
+//
+//        cartQuantityDecrement(p2);
+//        cartQuantityDecrement(p2);
+//        cartQuantityDecrement(p2);
+//        cartQuantityDecrement(p2);
+//        cartQuantityDecrement(p2);
+//        
+//        cartQuantityDecrement(p3);
+//        cartQuantityDecrement(p3);
+//        cartQuantityDecrement(p3);
+//        cartQuantityDecrement(p3);
+//        cartQuantityDecrement(p3);
+//        cartQuantityDecrement(p3);
+//        cartQuantityDecrement(p3);
+//        cartQuantityDecrement(p3);
 
         for (OrderDetails od : cartProductRow) {
             CartProduct prod = new CartProduct(od.getProduct().getName(), 

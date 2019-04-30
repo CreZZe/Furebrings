@@ -9,6 +9,7 @@ import entities.Account;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +29,22 @@ public class AccountFacade extends AbstractFacade<Account> {
     public AccountFacade() {
         super(Account.class);
     }
-    
+
+    public boolean register(Account acc) {
+        Query q = em.createQuery("SELECT a FROM Account a WHERE a.mail =:mail");
+        q.setParameter("mail", acc.getMail());
+        try {
+            Account accDB = (Account) q.getSingleResult();
+            return false;
+        }
+        catch (Exception e) {
+            try {
+                create(acc);
+                return true;
+            }
+            catch (Exception ex) {
+                return false;
+            }
+        }
+    } 
 }
