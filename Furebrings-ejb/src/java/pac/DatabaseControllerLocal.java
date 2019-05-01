@@ -32,4 +32,6 @@ public interface DatabaseControllerLocal {
 
     List<CartProduct> getProductsFromCart();
 
+    int getQuantityOfProductInCart(Products prod);
+
 }

@@ -53,11 +53,13 @@ public class CartController implements Serializable {
     
     // Bygga ihop prod-objektet på frontend eller backend??
     public String addToCart(Products item) {
-        if (databaseController.addProductToCart(item, 1)) {
-            cartProducts = databaseController.getProductsFromCart();
-            return "cart";
+        if (databaseController.getQuantity(item) > databaseController.getQuantityOfProductInCart(item)) {
+            if (databaseController.addProductToCart(item, 1)) {
+                cartProducts = databaseController.getProductsFromCart();
+                return "cart";
+            }
         }
-        return "index";
+        return "productpage";
     }
     
     public boolean cartQuantityIncrement(Products prod) {

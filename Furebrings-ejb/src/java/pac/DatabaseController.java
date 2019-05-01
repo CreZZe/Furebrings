@@ -205,6 +205,8 @@ public class DatabaseController implements DatabaseControllerLocal {
             return 0;
         }
     }
+    
+    
 
     @Override
     public List<CartProduct> getProductsFromCart() {
@@ -218,7 +220,16 @@ public class DatabaseController implements DatabaseControllerLocal {
         
         return cartProducts;
     }
+
+    @Override
+    public int getQuantityOfProductInCart(Products prod) {
+        for (OrderDetails item : cartProductRow) {
+            if (item.getProduct().getName().equals(prod.getName()))
+                return item.getQuantity();
+        }
     
+        return -1;
+    }
     
     
 }
