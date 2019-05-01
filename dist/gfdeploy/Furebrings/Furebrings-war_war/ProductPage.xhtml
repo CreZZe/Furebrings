@@ -20,7 +20,6 @@
                             <h:commandButton class="btn" action="#{productController.fetchAllProducts()}" value="Show All Products"></h:commandButton>
                             <h:dataTable value="#{productController.products}" var="Product"
                                          border="5" bgcolor="pink" cellpadding="10" rendered="#{productController.products.size() > 0}">
-                                <f:facet name="header">Authors</f:facet>
                                 <h:column>
                                     <f:facet name="header">Name</f:facet>
                                     <h:outputText id="o1" value="#{Product.name}"></h:outputText>
@@ -28,6 +27,17 @@
                                 <h:column>
                                     <f:facet name="header">Category</f:facet>
                                     <h:outputText id="o2" value="#{Product.category.name}"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Price</f:facet>
+                                    <h:outputText id="o3" value="#{Product.cost}"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Quantity In Store</f:facet>
+                                    <h:outputText id="o4" value="#{Product.quantityInStore}"></h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <h:commandButton value="Add To Cart" action="#{cartController.addToCart(Product)}"></h:commandButton>
                                 </h:column>
                             </h:dataTable>
                         </h:form>

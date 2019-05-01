@@ -1,8 +1,6 @@
 package pac;
 
 import classes.CartProduct;
-import ejb.ProductsFacade;
-import entities.OrderDetails;
 import entities.Products;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -27,6 +25,7 @@ public class CartController implements Serializable {
             new CartProduct("Lägg till produkt", 0, 0)
     ));
     
+    private Products item;
     
     /**
      * Creates a new instance of CartController
@@ -43,12 +42,12 @@ public class CartController implements Serializable {
     }
     
     
-    public String productsFromDB() {
+    public String productsFromCart() {
         Products p1 = new Products("Gaffel", 12, 10, "Fin gaffel", null);
         Products p2 = new Products("Sked", 8, 5, "Fin sked", null);
         Products p3 = new Products("Kniv", 10, 8, "En vass kniv", null);
         
-        addToCart(p1, 5);
+        /*addToCart(p1, 5);
         addToCart(p2, 5);
         addToCart(p3, 5);
         
@@ -56,7 +55,7 @@ public class CartController implements Serializable {
         cartQuantityDecrement(p3);
         cartQuantityDecrement(p3);
         cartQuantityDecrement(p3);
-        cartQuantityDecrement(p3);
+        cartQuantityDecrement(p3);*/
         
         cartProducts = databaseController.getProductsFromCart();
         return "cart";
@@ -69,8 +68,13 @@ public class CartController implements Serializable {
     */
     
     // Bygga ihop prod-objektet på frontend eller backend??
-    public boolean addToCart(Products prod, int quantity) {
-        return databaseController.addProductToCart(prod, quantity);
+    public String addToCart(Products item) {
+        this.item = item;
+        if (databaseController.addProductToCart(item, 1)) {
+            cartProducts = databaseController.getProductsFromCart();
+            return "cart";
+        }
+        return "index";
     }
     
     public boolean cartQuantityIncrement(Products prod) {
