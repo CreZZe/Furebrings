@@ -25,6 +25,7 @@ public class ProductController implements Serializable {
     private ProductsFacade productsFacade;
 
     private List<Products> products;
+    private Products chosenProduct;
     
     public void fetchAllProducts(){
         products = productsFacade.findAll();
@@ -32,7 +33,11 @@ public class ProductController implements Serializable {
     
     public void fetchProductsByName(String name){
         products = productsFacade.findProductsByName(name);
-        System.out.println("test");
+    }
+    
+    public String showProductDetail(Products product){
+        chosenProduct = product;
+        return "item";
     }
     /**
      * Creates a new instance of ProductController
@@ -47,8 +52,14 @@ public class ProductController implements Serializable {
     public void setProducts(List<Products> products) {
         this.products = products;
     }
+
+    public Products getChosenProduct() {
+        return chosenProduct;
+    }
+
+    public void setChosenProduct(Products chosenProduct) {
+        this.chosenProduct = chosenProduct;
+    }
     
-    
-    
-    
+       
 }
