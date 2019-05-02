@@ -34,4 +34,6 @@ public interface DatabaseControllerLocal {
 
     int getQuantityOfProductInCart(Products prod);
 
+    Account getAccountDB();
+
 }

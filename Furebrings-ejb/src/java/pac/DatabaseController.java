@@ -7,7 +7,6 @@ import entities.OrderDetails;
 import entities.Orders;
 import entities.Products;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
@@ -92,34 +91,20 @@ public class DatabaseController implements DatabaseControllerLocal {
 
     @Override
     public boolean addProductToCart(Products prod, int quantity) {
-        
         int sizeBefore = cartProductRow.size();
         
-        for (int i = 0; i < cartProductRow.size(); i++) {
-            OrderDetails item = cartProductRow.get(i);
+        for (OrderDetails item : cartProductRow) {
             if (item.getProduct().getName().equals(prod.getName())) {
                 if (getQuantity(prod) >= item.getQuantity() + quantity){
                     item.setQuantity(item.getQuantity() + quantity);
                     return true;
                 }
-                return false;
             }
         }
         
-        /*for (OrderDetails item : cartProductRow) {
-            if (item.getProduct().getName().equals(prod.getName())) {
-                if (getQuantity(prod) >= item.getQuantity() + quantity){
-                    item.setQuantity(item.getQuantity() + quantity);
-                    return true;
-                }
-            }
-        }*/
-        
         cartProductRow.add(new OrderDetails(prod, quantity, order));
         
-        if (cartProductRow.size() > sizeBefore)
-            return true;
-        return false;
+        return cartProductRow.size() > sizeBefore;
     }
     
     
@@ -132,9 +117,8 @@ public class DatabaseController implements DatabaseControllerLocal {
      * @return boolean : false vid problem, annars true
      */
     @Override
-    public boolean cartQuantityIncrement(Products prod) {
-        for (int i = 0; i < cartProductRow.size(); i++) {
-            OrderDetails item = cartProductRow.get(i);
+    public boolean cartQuantityIncrement(Products prod) {        
+        for (OrderDetails item : cartProductRow) {
             if (item.getProduct().getName().equals(prod.getName())) {
                 if (getQuantity(prod) > item.getQuantity()) {
                     item.setQuantity(item.getQuantity() + 1);
@@ -143,16 +127,6 @@ public class DatabaseController implements DatabaseControllerLocal {
                 return false;
             }
         }
-        
-        /*for (OrderDetails item : cartProductRow) {
-            if (item.getProduct().getName().equals(prod.getName())) {
-                //KONTROLLERA SÅ DET FINNS I LAGER INNAN
-                if (getQuantity(prod) > item.getQuantity()) {
-                    item.setQuantity(item.getQuantity() + 1);
-                    return true;
-                }
-            }
-        }*/
         
         return false;
     }
@@ -165,20 +139,6 @@ public class DatabaseController implements DatabaseControllerLocal {
      */
     @Override
     public boolean cartQuantityDecrement(Products prod) {
-        /*OrderDetails item;
-        for (int i = 0; i < cartProductRow.size(); i++) {
-            item = cartProductRow.get(i);
-            if (item.getProduct().getName().equals(prod.getName())) {
-                item.setQuantity(item.getQuantity() - 1);
-                
-                
-                if (item.getQuantity() == 0)
-                    cartProductRow.remove(i);
-                
-                //return true;
-            }
-        }*/
-        
         for (OrderDetails item : cartProductRow) {
             if (item.getProduct().getName().equals(prod.getName())) {
                 item.setQuantity(item.getQuantity() - 1);
@@ -229,6 +189,11 @@ public class DatabaseController implements DatabaseControllerLocal {
         }
     
         return -1;
+    }
+
+    @Override
+    public Account getAccountDB() {
+        return accountDB;
     }
     
     

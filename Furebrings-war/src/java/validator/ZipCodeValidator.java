@@ -21,10 +21,17 @@ public class ZipCodeValidator implements Validator{
             return;
         }
         
-        String str = (String)value;        
+        String str = (String)value;  
+        String message = "Postnummer ska vara 5 siffror.";
+        
+        try{
+            int zipcode = Integer.parseInt(str);
 
-        if(!str.matches("[1-9][0-7][0-9]{3}")){
-            String message = "Postnummer ska vara 5 siffror.";                        
+            if(zipcode < 10000 || zipcode > 97999){
+                                        
+                throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+            }
+        } catch (NumberFormatException e){
             throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
         }
     }
