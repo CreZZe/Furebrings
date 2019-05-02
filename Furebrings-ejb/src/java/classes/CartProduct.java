@@ -5,13 +5,13 @@ public class CartProduct {
     private String name;
     private float cost;
     private int quantity;
-    private float totaltPrice;
+    private float totaltProductPrice;
 
     public CartProduct(String name, float cost, int quantity) {
         this.name = name;
         this.cost = cost;
         this.quantity = quantity;
-        this.totaltPrice = cost*quantity;
+        this.totaltProductPrice = cost*quantity;
     }
 
     public String getName() {
@@ -36,16 +36,14 @@ public class CartProduct {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-        this.totaltPrice = cost*quantity;
+        this.totaltProductPrice = cost*quantity;
     }
 
-    public float getTotaltPrice() {
-        return totaltPrice;
+    public float getTotaltProductPrice() {
+        return totaltProductPrice;
     }
 
-    public void setTotaltPrice(float totaltPrice) {
-        this.totaltPrice = totaltPrice;
-    }
-    
-    
+    public void setTotaltProductPrice(float totaltProductPrice) {
+        this.totaltProductPrice = totaltProductPrice;
+    }   
 }

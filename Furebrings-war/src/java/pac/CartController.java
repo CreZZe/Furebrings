@@ -1,6 +1,7 @@
 package pac;
 
 import classes.CartProduct;
+import ejb.ProductsFacade;
 import entities.Products;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -19,11 +20,16 @@ import javax.ejb.EJB;
 public class CartController implements Serializable {
 
     @EJB
-    private DatabaseControllerLocal databaseController;
+    private ProductsFacade productsFacade;
 
+    @EJB
+    private DatabaseControllerLocal databaseController;
+    
     private List<CartProduct> cartProducts = new ArrayList<>(Arrays.asList(
             new CartProduct("Lägg till produkt", 0, 0)
     ));
+    
+    private float totalPrice = 0;
         
     /**
      * Creates a new instance of CartController
@@ -56,17 +62,41 @@ public class CartController implements Serializable {
         if (databaseController.getQuantity(item) > databaseController.getQuantityOfProductInCart(item)) {
             if (databaseController.addProductToCart(item, 1)) {
                 cartProducts = databaseController.getProductsFromCart();
+                calcTotalPrice();
                 return "cart";
             }
         }
         return "productpage";
     }
     
-    public boolean cartQuantityIncrement(Products prod) {
-        return databaseController.cartQuantityIncrement(prod);
+    public String cartQuantityIncrement(CartProduct cartProd) {
+        if (databaseController.cartQuantityIncrement(productsFacade.findProductsByName(cartProd.getName()).get(0))) {
+            cartProducts = databaseController.getProductsFromCart();
+            calcTotalPrice();
+        }
+        return "cart";
     }
     
-    public boolean cartQuantityDecrement(Products prod) {
-        return databaseController.cartQuantityDecrement(prod);
+    public String cartQuantityDecrement(CartProduct cartProd) {
+        if (databaseController.cartQuantityDecrement(productsFacade.findProductsByName(cartProd.getName()).get(0))) {
+            cartProducts = databaseController.getProductsFromCart();
+            calcTotalPrice();
+        }
+        return "cart";
+    }
+
+    public float getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+    
+    private void calcTotalPrice() {
+        totalPrice = 0;
+        cartProducts.forEach((prod) -> {
+            totalPrice += prod.getTotaltProductPrice();
+        });
     }
 }
