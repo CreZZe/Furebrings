@@ -35,9 +35,10 @@
                         <ul id="nav-mobile" class="right hide-on-med-and-down" style="display: inline">
                             <f:view>
                                 <h:form class="">
-                                    <li><h:inputText value="sökfält" class="black-text">
+                                    <li><h:inputText value="#{productController.searchName}" class="black-text">
 
                                         </h:inputText></li>
+                                    <li><h:commandButton action="#{productController.filterProductByName(productController.searchName)}" value="search" class="fas fa-search black-text"></h:commandButton></li>
                                     <li><i class="fas fa-search black-text"></i></li>
                                     <li><h:commandLink class="black-text" action="#{cartController.productsFromCart}">Kundvagn</h:commandLink></li>
                                     <li><h:commandLink class="black-text" action="login">logga in/konto</h:commandLink></li>
@@ -51,10 +52,10 @@
                         <ul class="cat">
                             <f:view>
                                 <h:form>
-                                    <li><h:commandButton value="Kategori 1" class="btn blue" action="productpage"></h:commandButton></li>
-                                    <li><h:commandButton value="Kategori 2" class="btn blue" action="productpage"></h:commandButton></li>
-                                    <li><h:commandButton value="Kategori 3" class="btn blue" action="productpage"></h:commandButton></li>
-                                    <li><h:commandButton value="Kategori 4" class="btn blue" action="productpage"></h:commandButton></li>
+                                    <li><h:commandButton value="Kategori 1" class="btn blue" action="#{productController.filterProductByCategoryId(1)}"></h:commandButton></li>
+                                    <li><h:commandButton value="Kategori 2" class="btn blue" action="#{productController.filterProductByCategoryId(2)}"></h:commandButton></li>
+                                    <li><h:commandButton value="Kategori 3" class="btn blue" action="#{productController.showAllProducts()}"></h:commandButton></li>
+                                    <li><h:commandButton value="Kategori 4" class="btn blue" action="#{productController.showAllProducts()}"></h:commandButton></li>
                                 </h:form>
                             </f:view>
                         </ul>

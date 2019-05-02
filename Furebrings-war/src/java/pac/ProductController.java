@@ -11,6 +11,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 
 /**
@@ -24,20 +26,39 @@ public class ProductController implements Serializable {
     @EJB
     private ProductsFacade productsFacade;
 
-    private List<Products> products;
+    private List<Products> allProducts;
+    private List<Products> filteredProducts;
+    private String searchName;
     private Products chosenProduct;
     
+    @PostConstruct
     public void fetchAllProducts(){
-        products = productsFacade.findAll();
+        allProducts = productsFacade.findAll();
+        //filteredProducts = allProducts;
     }
     
     public void fetchProductsByName(String name){
-        products = productsFacade.findProductsByName(name);
+        filteredProducts = productsFacade.findProductsByName(name);
+    }
+    
+    public String showAllProducts(){
+        filteredProducts = allProducts;
+        return "productpage";
     }
     
     public String showProductDetail(Products product){
         chosenProduct = product;
         return "item";
+    }
+    
+    public String filterProductByCategoryId(int id){
+        filteredProducts = allProducts.stream().filter(p -> p.getCategory().getId() == id).collect(Collectors.toList());
+        return "productpage";
+    }
+    
+    public String filterProductByName(String name){
+        filteredProducts = allProducts.stream().filter(p -> (p.getName().toLowerCase().indexOf(name.toLowerCase()))>=0).collect(Collectors.toList());
+        return "productpage";
     }
     /**
      * Creates a new instance of ProductController
@@ -45,12 +66,12 @@ public class ProductController implements Serializable {
     public ProductController() {
     }
 
-    public List<Products> getProducts() {
-        return products;
+    public List<Products> getAllProducts() {
+        return allProducts;
     }
 
-    public void setProducts(List<Products> products) {
-        this.products = products;
+    public void setAllProducts(List<Products> allProducts) {
+        this.allProducts = allProducts;
     }
 
     public Products getChosenProduct() {
@@ -60,6 +81,25 @@ public class ProductController implements Serializable {
     public void setChosenProduct(Products chosenProduct) {
         this.chosenProduct = chosenProduct;
     }
+
+    public List<Products> getFilteredProducts() {
+        return filteredProducts;
+    }
+
+    public void setFilteredProducts(List<Products> filteredProducts) {
+        this.filteredProducts = filteredProducts;
+    }
+
+    public String getSearchName() {
+        return searchName;
+    }
+
+    public void setSearchName(String searchName) {
+        this.searchName = searchName;
+    }
+    
+    
+    
     
        
 }

@@ -68,6 +68,11 @@
             <from-outcome>productpage</from-outcome>
             <to-view-id>/ProductPage.xhtml</to-view-id>
         </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>item</from-outcome>
+            <to-view-id>/Product.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/Cart.xhtml</from-view-id>
