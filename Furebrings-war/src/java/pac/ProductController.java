@@ -113,7 +113,8 @@ public class ProductController implements Serializable {
     public void init() {
         if (productsFacade.findAll().isEmpty()) {
             Customer cust = new Customer("Mikael", "Fredriksson", "0737777777", "Toppartorp 123", "19333", "Stockholm", "Sweden");
-
+            Customer cust2 = new Customer("Göran", "Petterson", "0739231233", "Odengatan 23", "19233", "Stockholm", "Sweden", 550000);
+            
             Orders order1 = new Orders(cust);
             Orders order2 = new Orders(cust);
 
@@ -171,10 +172,18 @@ public class ProductController implements Serializable {
             orders.add(order1);
             orders.add(order2);
 
-            cust.setOrders(orders);
+            cust2.setOrders(orders);
 
-            Account acc = new Account("224Mikael@gmail.com", "asd123", "premium", cust);
+            /*Account acc = new Account("224Mikael@gmail.com", "asd123", "regular", cust);
             accountFacade.register(acc);
+            
+            Account acc2 = new Account("admin@admin.com", "Adminpass123", "admin");
+            accountFacade.register(acc2);*/
+            
+            Account acc3 = new Account("premium@premium.com", "Premiumpass123", "premium", cust2);
+            accountFacade.register(acc3);
+            
+            //KOLLA PÅ DET HÄR
         }
     }
 }

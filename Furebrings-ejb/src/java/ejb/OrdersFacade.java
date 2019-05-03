@@ -5,7 +5,10 @@
  */
 package ejb;
 
+import entities.Customer;
 import entities.Orders;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +31,16 @@ public class OrdersFacade extends AbstractFacade<Orders> {
     public OrdersFacade() {
         super(Orders.class);
     }
+
+    public List<Orders> findOrdersByCustomer(Customer cust) {
+        List<Orders> allOrders = findAll();
+        List<Orders> filteredOrders = new ArrayList<>();
+        allOrders.stream().filter((order) -> (order.getCustomer() == cust)).forEachOrdered((order) -> {
+            filteredOrders.add(order);
+        });
+        
+        return filteredOrders;
+    }
+    
     
 }

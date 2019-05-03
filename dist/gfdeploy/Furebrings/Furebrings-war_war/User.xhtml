@@ -12,8 +12,31 @@
            
             <ui:define name="content">
                 <h2>Min Profil</h2>
-        
+                
+                <h:outputLabel value="#{adminController.currentCustomer.firstName} #{adminController.currentCustomer.lastName}"></h:outputLabel>
+                <h:outputLabel value="#{adminController.currentCustomer.phoneNumber}"></h:outputLabel>
+                <h:outputLabel value="#{adminController.currentCustomer.address}"></h:outputLabel>
+                <h:outputLabel value="#{adminController.currentCustomer.country}"></h:outputLabel>
+                <h:outputLabel value="#{adminController.currentCustomer.city}"></h:outputLabel>
+                
                 <h3>Dina tidigare köp</h3>
+                <f:view>
+                    <h:form>
+                        <h:dataTable value="#{adminController.currentCustomer.orders}" var="order">
+                            <h:column>
+                                <f:facet name="header">Ordernummer</f:facet>
+                                #{order.id}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Antal Produkter</f:facet>
+                                #{order.orderDetails.size()}
+                            </h:column>
+                            <h:column>
+                                <h:commandButton value="Se Order" action="#{adminController.order(order)}"></h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </f:view>
             </ui:define>
             
         </ui:composition>

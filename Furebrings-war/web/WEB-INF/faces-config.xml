@@ -43,7 +43,10 @@
     
     <navigation-rule>
         <from-view-id>/User.xhtml</from-view-id>
-      
+        <navigation-case>
+            <from-outcome>userOrder</from-outcome>
+            <to-view-id>/UserOrder.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
     
     <navigation-rule>
@@ -89,4 +92,12 @@
             <to-view-id>/Product.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/Admin.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>user</from-outcome>
+            <to-view-id>/User.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>

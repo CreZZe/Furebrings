@@ -27,25 +27,25 @@
                     <h:form>
                         <h:dataTable value="#{cartController.cartProducts}" var="prod">
                             <h:column>
-                                <f:facet name="header">Product</f:facet>
+                                <f:facet name="header">Produkt</f:facet>
                                 #{prod.name}
                             </h:column>
                             <h:column>
-                                <f:facet name="header">Price</f:facet>
+                                <f:facet name="header">Pris</f:facet>
                                 #{prod.cost}
                             </h:column>
                             <h:column>
-                                <f:facet name="header">Quantity</f:facet>
+                                <f:facet name="header">Antal</f:facet>
                                 <h:commandButton value="-" action="#{cartController.cartQuantityDecrement(prod)}"></h:commandButton>
                                 #{prod.quantity}
                                 <h:commandButton value="+" action="#{cartController.cartQuantityIncrement(prod)}"></h:commandButton>
                             </h:column>
                             <h:column>
-                                <f:facet name="header">Total Product Price</f:facet>
+                                <f:facet name="header">Totalt Pris Per Produkt</f:facet>
                                 #{prod.totaltProductPrice}
                             </h:column>        
                         </h:dataTable>
-                        <h:outputLabel value="Total Price: #{cartController.totalPrice}"></h:outputLabel>
+                        <h:outputLabel value="Totalt Pris: #{cartController.totalPrice}"></h:outputLabel>
                     </h:form>
                 </f:view>
             </ui:define>

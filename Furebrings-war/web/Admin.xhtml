@@ -17,7 +17,31 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h2>This is the admin page</h2>
+        <f:view>
+            <h:form>
+                <h:dataTable value="#{adminController.customers}" var="cust">
+                    <h:column>
+                        <f:facet name="header">Kund</f:facet>
+                        #{cust.firstName} #{cust.lastName}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Land</f:facet>
+                        #{cust.country}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Stad</f:facet>
+                        #{cust.city}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Telefonnummer</f:facet>
+                        #{cust.phoneNumber}
+                    </h:column>
+                    <h:column>
+                        <h:commandButton value="Se Profil" action="#{adminController.profile(cust)}"></h:commandButton>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
     </h:body>
 </html>
 
