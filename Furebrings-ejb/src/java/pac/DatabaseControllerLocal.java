@@ -3,9 +3,7 @@ package pac;
 import classes.CartProduct;
 import entities.Account;
 import entities.Customer;
-import entities.OrderDetails;
 import entities.Products;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -35,5 +33,7 @@ public interface DatabaseControllerLocal {
     int getQuantityOfProductInCart(Products prod);
 
     Account getAccountDB();
+
+    void setAccountDB(Account accountDB);
 
 }

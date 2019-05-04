@@ -14,7 +14,7 @@
                 
                 <div class="row">
                     <f:view>
-                        <h:form>
+                        <h:form id="form">
                             <div class="row col s6 offset-s2">
                                 <p>mail</p>
                                 <h:inputText class="input-field col s6" id="email" value="#{controller.mail}">
@@ -32,7 +32,8 @@
 
                             </div>
                             <div class="row col s6 offset-s2">
-                                <h:commandButton value="Logga in" action="#{controller.login()}"></h:commandButton>
+                                <h:commandButton id="loggain" class="btn" value="Logga in" action="#{controller.login()}"></h:commandButton>
+                                <h:message for="loggain" errorStyle="color:red"/>
                             </div>
 
                         </h:form>
