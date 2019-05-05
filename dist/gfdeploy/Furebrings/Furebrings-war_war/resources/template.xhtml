@@ -19,7 +19,7 @@
     </h:head>
 
     <h:body>
-        
+            
         <div id="top">
             <!-- Navigation start -->
             <div id="navigation" class="row">
@@ -38,10 +38,11 @@
                                     <li><h:inputText value="#{productController.searchName}" class="black-text">
 
                                         </h:inputText></li>
-                                    <li><h:commandButton action="#{productController.filterProductByName(productController.searchName)}" value="search" class="fas fa-search black-text"></h:commandButton></li>
+                                    <li><h:commandButton action="#{productController.filterProductByName(productController.searchName)}" value="search" class="btn"></h:commandButton></li>
                                     <li><i class="fas fa-search black-text"></i></li>
                                     <li><h:commandLink class="black-text" action="#{cartController.productsFromCart}">Kundvagn</h:commandLink></li>
-                                    <li><h:commandLink class="black-text" action="login">logga in/konto</h:commandLink></li>
+                                    <li><h:commandLink id="login" binding="#{controller.loginLink}" class="black-text" action="login" value="logga in/konto"></h:commandLink></li>
+                                    <li><h:commandLink id="logout" binding="#{controller.logoutLink}" class="black-text" action="#{controller.logout()}"></h:commandLink></li>
                                 </h:form>
                             </f:view>
                         </ul>

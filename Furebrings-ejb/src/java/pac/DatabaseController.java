@@ -9,6 +9,8 @@ import entities.Products;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateful;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -54,7 +56,7 @@ public class DatabaseController implements DatabaseControllerLocal {
 
     @Override
     public String checkLogin(Account acc) {
-        Query q = em.createQuery("SELECT a FROM Account a WHERE a.mail =:mail AND a.pass =:pass");
+        Query q = em.createQuery("SELECT a FROM Account a WHERE a.mail = :mail AND a.pass = :pass");
         q.setParameter("mail", acc.getMail());
         q.setParameter("pass", acc.getPass());
         try {
@@ -76,6 +78,10 @@ public class DatabaseController implements DatabaseControllerLocal {
             }
         }
         catch (Exception e) {
+            //e.printStackTrace();
+            String message = "Inloggning misslyckades, se över dina uppgifter.";
+            FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,message,null);
+            FacesContext.getCurrentInstance().addMessage("form:loggain", msg);
             return null;
         }
         
@@ -195,6 +201,10 @@ public class DatabaseController implements DatabaseControllerLocal {
     public Account getAccountDB() {
         return accountDB;
     }
-    
-    
+
+    @Override
+    public void setAccountDB(Account accountDB) {
+        this.accountDB = accountDB;
+    }
+       
 }

@@ -1,21 +1,13 @@
 package pac;
 
 import ejb.AccountFacade;
-import ejb.CategoriesFacade;
-import ejb.ProductsFacade;
 import entities.Account;
-import entities.Categories;
 import entities.Customer;
-import entities.OrderDetails;
-import entities.Orders;
-import entities.Products;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.component.UICommand;
 
 /**
  *
@@ -46,6 +38,9 @@ public class Controller implements Serializable {
     private String city;
     private String country;
     private Customer cust;
+    
+    private UICommand logoutLink;
+    private UICommand loginLink;
     /**
      * Creates a new instance of Controller
      */
@@ -141,9 +136,21 @@ public class Controller implements Serializable {
         this.country = country;
     }
     
-    /*public void addCustomer() {
-        databaseController.addCustomer(acc);
-    }*/
+    public UICommand getLogoutLink() {
+        return logoutLink;
+    }
+
+    public void setLogoutLink(UICommand logoutLink) {
+        this.logoutLink = logoutLink;
+    }
+
+    public UICommand getLoginLink() {
+        return loginLink;
+    }
+
+    public void setLoginLink(UICommand loginLink) {
+        this.loginLink = loginLink;
+    }
     
     public void addAccount() {
         acc = new Account(mail, pass, "regular", null);
@@ -167,11 +174,38 @@ public class Controller implements Serializable {
                 if str == customer --> Inloggningen gick igenom, vanlig eller premiumkund inloggad
                 if str == admin --> Inloggningen gick igenom, admin inloggad
                 if str == null --> Inloggningen lyckades inte, ingen inloggad
-            */
-        return databaseController.checkLogin(acc);
+            */ 
+        String result = databaseController.checkLogin(acc);
+        checkLogin();
+        return result;
     }
     
     public void dbRole() {
         fname = databaseController.getAccountRole();
     }
+    
+    public boolean isLoggedIn(){
+        Account account = databaseController.getAccountDB();
+        System.out.println(account == null);
+        return account != null;
+    }
+    
+    public void checkLogin(){        
+        if(!isLoggedIn()){
+            loginLink.setRendered(true);
+            logoutLink.setRendered(false);
+        } else {
+            logoutLink.setValue(databaseController.getAccountDB().getCustomer().getFirstName() + "/logga ut");
+            logoutLink.setRendered(true);
+            loginLink.setRendered(false);
+
+        }   
+    }
+    
+    public String logout(){
+        databaseController.setAccountDB(null);
+        checkLogin();
+        return "index";
+    }
+     
 }
