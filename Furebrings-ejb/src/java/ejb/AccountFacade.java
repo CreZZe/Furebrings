@@ -31,8 +31,8 @@ public class AccountFacade extends AbstractFacade<Account> {
     }
 
     public boolean register(Account acc) {
-        Query q = em.createQuery("SELECT a FROM Account a WHERE a.mail =:mail");
-        q.setParameter("mail", acc.getMail());
+        Query q = em.createQuery("SELECT a FROM Account a WHERE lower(a.mail) =:mail");
+        q.setParameter("mail", acc.getMail().toLowerCase());
         try {
             Account accDB = (Account) q.getSingleResult();
             return false;

@@ -170,7 +170,7 @@ public class ProductController implements Serializable {
 
             cust2.setOrders(orders);
 
-            Account acc = new Account("224Mikael@gmail.com", "asd123", "regular", cust);
+            Account acc = new Account("224Mikael@gmail.com", "Regularpass123", "regular", cust);
             accountFacade.register(acc);
             
             Account acc2 = new Account("admin@admin.com", "Adminpass123", "admin");
