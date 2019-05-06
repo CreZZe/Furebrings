@@ -36,4 +36,7 @@ public interface DatabaseControllerLocal {
 
     void setAccountDB(Account accountDB);
 
+    boolean createOrder();
+
+    boolean placeOrder(Account acc);
 }

@@ -111,8 +111,8 @@ public class ProductController implements Serializable {
             Customer cust = new Customer("Mikael", "Fredriksson", "0737777777", "Toppartorp 123", "19333", "Stockholm", "Sweden");
             Customer cust2 = new Customer("Göran", "Petterson", "0739231233", "Odengatan 23", "19233", "Stockholm", "Sweden", 550000);
             
-            Orders order1 = new Orders(cust);
-            Orders order2 = new Orders(cust);
+            Orders order1 = new Orders(cust2);
+            Orders order2 = new Orders(cust2);
 
             Categories cat1 = new Categories("Leksaker");
             Categories cat2 = new Categories("Cyklar");

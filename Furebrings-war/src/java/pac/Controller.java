@@ -1,5 +1,6 @@
 package pac;
 
+import classes.CartProduct;
 import ejb.AccountFacade;
 import entities.Account;
 import entities.Customer;
@@ -208,4 +209,7 @@ public class Controller implements Serializable {
         return "index";
     }
      
+    public Account getAccountDB() {
+        return databaseController.getAccountDB();
+    }
 }

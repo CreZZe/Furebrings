@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -24,6 +25,9 @@ public class CartController implements Serializable {
 
     @EJB
     private DatabaseControllerLocal databaseController;
+    
+    @Inject
+    private Controller controller;
     
     private List<CartProduct> cartProducts = new ArrayList<>(Arrays.asList(
             new CartProduct("Lägg till produkt", 0, 0)
@@ -98,5 +102,9 @@ public class CartController implements Serializable {
         cartProducts.forEach((prod) -> {
             totalPrice += prod.getTotaltProductPrice();
         });
+    }
+    
+    public void createOrder() {
+        databaseController.placeOrder(controller.getAccountDB());
     }
 }

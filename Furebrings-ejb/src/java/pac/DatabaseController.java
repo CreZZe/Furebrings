@@ -68,11 +68,11 @@ public class DatabaseController implements DatabaseControllerLocal {
                 System.out.println(accDB.getAccRole());
                 
                 if (role.equals("regular") || role.equals("premium")) {
-                    order = new Orders(accDB.getCustomer());
+                    //order = new Orders(accDB.getCustomer());
                     return "customer";
                 }
                 else if (role.equals("admin")) {
-                    order = new Orders(accDB.getCustomer());
+                    //order = new Orders(accDB.getCustomer());
                     return "admin"; 
                 }
             }
@@ -206,5 +206,61 @@ public class DatabaseController implements DatabaseControllerLocal {
     public void setAccountDB(Account accountDB) {
         this.accountDB = accountDB;
     }
-       
+
+    @Override
+    public boolean createOrder() {
+        if (getAccountRole().equals("premium")) {
+            order.setOrderDetails(cartProductRow);
+            Orders tempOrder = order;
+            
+            tempOrder.getOrderDetails().forEach((tempOD) -> {
+                tempOD.getProduct().setCost(tempOD.getProduct().getCost() * 0.9f);
+            });
+            
+            persist(tempOrder);
+        }
+        else
+            persist(order);
+        
+        return false;
+    }
+
+    @Override
+    public boolean placeOrder(Account acc) {
+        if (acc.getAccRole().equals("premium")) {
+            if (order == null) {
+                order = new Orders(acc.getCustomer());
+            }
+            order.setOrderDetails(cartProductRow);
+            Orders tempOrder = order;
+            
+            tempOrder.getOrderDetails().forEach((tempOD) -> {
+                tempOD.getProduct().setCost(tempOD.getProduct().getCost() * 0.9f);
+            });
+            
+            //persist(order);
+            cartProductRow.forEach((prod) -> {
+                prod.setOrder(order);
+                persist(prod);
+            });
+        }
+        else
+            persist(order);
+        
+        return false;
+    }
+    
+    
+    
+    
 }
+
+
+
+
+/*
+    Tar bort 10 % när produkterna skrivs ut
+    Tar bort 10 % precis innan ordern läggs
+
+    Loggar man ut ska orginalpriset visas i t.ex. varukorgen
+*/
