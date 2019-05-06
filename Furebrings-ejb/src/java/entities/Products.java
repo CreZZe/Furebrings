@@ -19,7 +19,7 @@ public class Products implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional=false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private float cost;
