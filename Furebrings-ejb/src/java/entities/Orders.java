@@ -4,6 +4,7 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @ManyToOne(cascade=PERSIST)
+    @ManyToOne(cascade=MERGE)
     private Customer customer;
     
     @OneToMany(cascade=PERSIST, mappedBy="order")
@@ -66,7 +67,7 @@ public class Orders implements Serializable {
         return hash;
     }
 
-    /*@Override
+    @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Orders)) {
@@ -77,7 +78,7 @@ public class Orders implements Serializable {
             return false;
         }
         return true;
-    }*/
+    }
 
     @Override
     public String toString() {

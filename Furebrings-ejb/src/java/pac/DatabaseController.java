@@ -99,7 +99,8 @@ public class DatabaseController implements DatabaseControllerLocal {
     public boolean addProductToCart(Products prod, int quantity) {
         int sizeBefore = cartProductRow.size();
         
-        for (OrderDetails item : cartProductRow) {
+        for (int i = 0; i < cartProductRow.size(); i++) {
+            OrderDetails item = cartProductRow.get(i);
             if (item.getProduct().getName().equals(prod.getName())) {
                 if (getQuantity(prod) >= item.getQuantity() + quantity){
                     item.setQuantity(item.getQuantity() + quantity);
@@ -123,8 +124,9 @@ public class DatabaseController implements DatabaseControllerLocal {
      * @return boolean : false vid problem, annars true
      */
     @Override
-    public boolean cartQuantityIncrement(Products prod) {        
-        for (OrderDetails item : cartProductRow) {
+    public boolean cartQuantityIncrement(Products prod) {
+        for (int i = 0; i < cartProductRow.size(); i++) {
+            OrderDetails item = cartProductRow.get(i);
             if (item.getProduct().getName().equals(prod.getName())) {
                 if (getQuantity(prod) > item.getQuantity()) {
                     item.setQuantity(item.getQuantity() + 1);
@@ -145,7 +147,8 @@ public class DatabaseController implements DatabaseControllerLocal {
      */
     @Override
     public boolean cartQuantityDecrement(Products prod) {
-        for (OrderDetails item : cartProductRow) {
+        for (int i = 0; i < cartProductRow.size(); i++) {
+            OrderDetails item = cartProductRow.get(i);
             if (item.getProduct().getName().equals(prod.getName())) {
                 item.setQuantity(item.getQuantity() - 1);
                 
@@ -178,9 +181,10 @@ public class DatabaseController implements DatabaseControllerLocal {
     public List<CartProduct> getProductsFromCart() {
         List<CartProduct> cartProducts = new ArrayList<>();
 
-        for (OrderDetails od : cartProductRow) {
-            CartProduct prod = new CartProduct(od.getProduct().getName(), 
-                    od.getProduct().getCost(), od.getQuantity());
+        for (int i = 0; i < cartProductRow.size(); i++) {
+            OrderDetails item = cartProductRow.get(i);
+            CartProduct prod = new CartProduct(item.getProduct().getName(), 
+            item.getProduct().getCost(), item.getQuantity());
             cartProducts.add(prod);
         }
         
@@ -189,7 +193,9 @@ public class DatabaseController implements DatabaseControllerLocal {
 
     @Override
     public int getQuantityOfProductInCart(Products prod) {
-        for (OrderDetails item : cartProductRow) {
+
+        for (int i = 0; i < cartProductRow.size(); i++) {
+            OrderDetails item = cartProductRow.get(i);
             if (item.getProduct().getName().equals(prod.getName()))
                 return item.getQuantity();
         }
@@ -238,7 +244,7 @@ public class DatabaseController implements DatabaseControllerLocal {
                 tempOD.getProduct().setCost(tempOD.getProduct().getCost() * 0.9f);
             });
             
-            //persist(order);
+            persist(order);
             cartProductRow.forEach((prod) -> {
                 prod.setOrder(order);
                 persist(prod);

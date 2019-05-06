@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
+import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,6 @@ public class Products implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional=false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
@@ -26,7 +26,7 @@ public class Products implements Serializable {
     private int quantityInStore;
     private String description;
     
-    @ManyToOne(cascade=PERSIST)
+    @ManyToOne(cascade=MERGE)
     private Categories category;
     
     @OneToMany(cascade=PERSIST, mappedBy="product")
