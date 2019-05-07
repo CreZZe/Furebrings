@@ -219,8 +219,7 @@ public class DatabaseController implements DatabaseControllerLocal {
         if (acc.getAccRole().equals("premium")) {
             order = new Orders(true, acc.getCustomer());
             order.setOrderDetails(cartProductRow);
-            Orders tempOrder = order;
-            persist(tempOrder);
+            persist(order);
             
             /*
                 Ändra kostnaden för premiumkunder
@@ -229,18 +228,17 @@ public class DatabaseController implements DatabaseControllerLocal {
             });*/
             
             cartProductRow.forEach((prod) -> {
-                prod.setOrder(tempOrder);
+                prod.setOrder(order);
                 persist(prod);
             });
         }
         else {
             order = new Orders(false, acc.getCustomer());
             order.setOrderDetails(cartProductRow);
-            Orders tempOrder = order;
-            persist(tempOrder);
+            persist(order);
             
             cartProductRow.forEach((prod) -> {
-                prod.setOrder(tempOrder);
+                prod.setOrder(order);
                 persist(prod);
             });
         }
