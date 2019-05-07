@@ -69,7 +69,7 @@ public class DatabaseController implements DatabaseControllerLocal {
                 
                 if (role.equals("regular") || role.equals("premium")) {
                     //order = new Orders(accDB.getCustomer());
-                    return "customer";
+                    return "index";
                 }
                 else if (role.equals("admin")) {
                     //order = new Orders(accDB.getCustomer());
