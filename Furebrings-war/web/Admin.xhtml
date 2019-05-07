@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         
         <!-- Compiled and minified CSS -->
@@ -16,55 +17,38 @@
         <title>Cindys Cykelcenter - Admin</title>
     </h:head>
     <h:body>
-        <div id="top">
-            <div id="navigation" class="row">
-                <nav>
-                    <div class="nav-wrapper white">
-                        <h:graphicImage></h:graphicImage>
-                            <f:view>
-                                <h:form class="brand-logo">
-                                    <span><h:commandLink class="black-text" action="index">Cindys Cykelcenter</h:commandLink></span>
-                                </h:form>
-                            </f:view>
-
-                        <ul id="nav-mobile" class="right hide-on-med-and-down" style="display: inline">
-                            <f:view>
-                                <h:form class="">
-                                    <li><h:commandLink id="login" binding="#{controller.loginLink}" class="black-text" action="login" value="logga in/konto"></h:commandLink></li>
-                                    <li><h:commandLink id="logout" binding="#{controller.logoutLink}" class="black-text" action="#{controller.logout()}"></h:commandLink></li>
-                                </h:form>
-                            </f:view>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
+        <ui:composition template="./resources/template_admin.xhtml">
         
-        <f:view>
-            <h:form>
-                <h:dataTable value="#{adminController.customers}" var="cust">
-                    <h:column>
-                        <f:facet name="header">Kund</f:facet>
-                        #{cust.firstName} #{cust.lastName}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Land</f:facet>
-                        #{cust.country}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Stad</f:facet>
-                        #{cust.city}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Telefonnummer</f:facet>
-                        #{cust.phoneNumber}
-                    </h:column>
-                    <h:column>
-                        <h:commandButton value="Se Profil" action="#{adminController.profile(cust)}"></h:commandButton>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
-        </f:view>
+        <ui:define name="content">
+                <f:view>
+                    <h:form>
+                        <h:dataTable value="#{adminController.customers}" var="cust">
+                            <h:column>
+                                <f:facet name="header">Kund</f:facet>
+                                #{cust.firstName} #{cust.lastName}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Land</f:facet>
+                                #{cust.country}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Stad</f:facet>
+                                #{cust.city}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Telefonnummer</f:facet>
+                                #{cust.phoneNumber}
+                            </h:column>
+                            <h:column>
+                                <h:commandButton value="Se Profil" action="#{adminController.profile(cust)}"></h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </f:view>
+            
+            </ui:define>
+            
+        </ui:composition>
     </h:body>
 </html>
 
