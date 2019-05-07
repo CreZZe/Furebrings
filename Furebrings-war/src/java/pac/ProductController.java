@@ -38,9 +38,10 @@ public class ProductController implements Serializable {
     
     @PostConstruct
     public void fetchAllProducts(){
+        init();
         allProducts = productsFacade.findAll();
         //filteredProducts = allProducts;
-        init();
+        
     }
     
     public void fetchProductsByName(String name){
@@ -63,7 +64,11 @@ public class ProductController implements Serializable {
     }
     
     public String filterProductByName(String name){
-        filteredProducts = allProducts.stream().filter(p -> (p.getName().toLowerCase().indexOf(name.toLowerCase()))>=0).collect(Collectors.toList());
+        if(name==null || name.trim().equals("")){
+            filteredProducts = null;
+        } else {
+            filteredProducts = allProducts.stream().filter(p -> (p.getName().toLowerCase().indexOf(name.trim().toLowerCase()))>=0).collect(Collectors.toList());
+        }
         searchName = "";
         return "productpage";
     }

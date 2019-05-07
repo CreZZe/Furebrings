@@ -19,13 +19,14 @@
                     <h2>KUNDVAGN</h2>
                     <f:view>
                         <h:form>
-                            <h:commandButton value="Genomför köp" action="#{cartController.createOrder}"></h:commandButton>
+                            <h:commandButton value="Genomför köp" action="#{cartController.createOrder}"
+                                             rendered="#{cartController.cartProducts.size() > 0}"></h:commandButton>
                         </h:form>
                     </f:view>
                 </div>
                 <f:view>
                     <h:form>
-                        <h:dataTable value="#{cartController.cartProducts}" var="prod">
+                        <h:dataTable value="#{cartController.cartProducts}" var="prod" bgcolor="white">
                             <h:column>
                                 <f:facet name="header">Produkt</f:facet>
                                 #{prod.name}

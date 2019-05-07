@@ -196,7 +196,7 @@ public class Controller implements Serializable {
             loginLink.setRendered(true);
             logoutLink.setRendered(false);
         } else {
-            logoutLink.setValue(databaseController.getAccountDB().getCustomer().getFirstName() + "/logga ut");
+            logoutLink.setValue(databaseController.getAccountDB().getMail() + "/logga ut");
             logoutLink.setRendered(true);
             loginLink.setRendered(false);
 

@@ -1,3 +1,11 @@
+body{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background-image: url("images/bicycle-161524_1280.png");
+    background-size: cover;
+}
+
 .cat li {
     display: inline-block;
     margin-left: 20px;
@@ -18,4 +26,19 @@
 
 nav {
     border-bottom: 4px black solid;
+}
+
+#top{
+    position: sticky;
+    top:0;
+}
+
+#bottom{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.center_content{
+    padding-bottom: 50px;
 }
