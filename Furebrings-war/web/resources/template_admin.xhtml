@@ -21,7 +21,6 @@
     <h:body>
             
         <div id="top">
-            <!-- Navigation start -->
             <div id="navigation" class="row">
                 <nav>
                     <div class="nav-wrapper white">
@@ -35,13 +34,7 @@
                         <ul id="nav-mobile" class="right hide-on-med-and-down" style="display: inline">
                             <f:view>
                                 <h:form class="">
-                                    <li><h:commandLink value="Se Alla Produkter" class="btn blue" action="#{productController.showAllProducts()}"></h:commandLink></li>
-                                    <li><i class="fas fa-search black-text"></i></li>
-                                    <li><h:inputText value="#{productController.searchName}" class="black-text" size="30" maxlength="50">
-
-                                        </h:inputText></li>
-                                    <li><h:commandButton action="#{productController.filterProductByName(productController.searchName)}" value="search" class="btn"></h:commandButton></li>
-                                    <li><h:commandLink class="black-text" action="#{cartController.productsFromCart}">Kundvagn</h:commandLink></li>
+                                    <li><h:commandLink value="TOP" class="btn blue" action="admin"></h:commandLink></li>
                                     <li><h:commandLink id="login" binding="#{controller.loginLink}" class="black-text" action="login" value="logga in/konto"></h:commandLink></li>
                                     <li><h:commandLink id="logout" binding="#{controller.logoutLink}" class="black-text" action="#{controller.logout()}"></h:commandLink></li>
                                 </h:form>
@@ -49,15 +42,7 @@
                         </ul>
                     </div>
                 </nav>
-                <div class="width">
-                    <div class="row catbox">
-                        <ul class="cat">
-
-                        </ul>
-                    </div>    
-                </div>
             </div>
-            <!-- Navigation end -->
         </div>
 
         <div id="content" class="center_content">

@@ -42,6 +42,7 @@
                                     <h:commandButton class="btn" value="Add To Cart" action="#{cartController.addToCart(Product)}"></h:commandButton>
                                 </h:column>
                             </h:dataTable>
+                            <h:outputText value="Inga produkter hittades." rendered="#{!(productController.filteredProducts.size() > 0)}" />
                         </h:form>
                     </f:view>
                 </div>

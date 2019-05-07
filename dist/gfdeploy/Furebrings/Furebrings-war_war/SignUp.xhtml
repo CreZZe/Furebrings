@@ -77,7 +77,7 @@
 
                             <div class="row col s6 offset-s2">
                                 <p>E-post (t.ex. cindy@cindycykel.se)</p>
-                                <h:inputText id="email" value="#{controller.mail}">
+                                <h:inputText id="email" value="#{controller.mail}" maxlength="50">
                                     <f:validator validatorId="emailValidator"></f:validator>
                                 </h:inputText>
                                 <h:message for="email" errorStyle="color:red"/>
