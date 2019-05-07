@@ -119,9 +119,11 @@ public class ProductController implements Serializable {
         if (productsFacade.findAll().isEmpty()) {
             List<Categories> cats = new ArrayList<>();
             
-            cats.add(new Categories("Leksaker"));
-            cats.add(new Categories("Cyklar"));
-            cats.add(new Categories("Mat"));
+            cats.add(new Categories("Hybridcykel"));
+            cats.add(new Categories("Damcykel"));
+            cats.add(new Categories("Barncykel"));
+            cats.add(new Categories("Elcykel"));
+            cats.add(new Categories("Fatbykes"));
             
             for (int i = 0; i < cats.size(); i++) {
                 categoriesFacade.create(cats.get(i));
@@ -129,19 +131,18 @@ public class ProductController implements Serializable {
 
             List<Products> prods = new ArrayList<>();
             
-            prods.add(new Products("Brandbil", 29, 15, "Röd brandbil för barn mellan 0-5 år.", cats.get(0)));
-            prods.add(new Products("Docka", 12, 3, "Docka för barn mellan 3-10 år.", cats.get(0)));
-            prods.add(new Products("Studsboll", 20, 35, "Studsboll för barn mellan 10-15 år.", cats.get(0)));
-            prods.add(new Products("Snabb cykel", 1999, 4, "En väldigt snabb cykel för de som gillar fart!", cats.get(1)));
-            prods.add(new Products("Långsam cykel", 999, 5, "En mycket långsam cykel.", cats.get(1)));
-            prods.add(new Products("Tandemcykel", 1490, 2, "Tandemcykel som är perfekt för par.", cats.get(1)));
-            prods.add(new Products("Potatis", 2, 78, "Färskpotatis, perfekt för potatissallader!", cats.get(2)));
-            prods.add(new Products("Gurka", 15, 28, "Gurka från Litauen.", cats.get(2)));
-            prods.add(new Products("Paprika", 8, 17, "Paket innehållande en röd, en grön och en gul paprika.", cats.get(2)));
-            prods.add(new Products("Mjölk", 12, 32, "Lättmjölk från ARLA.", cats.get(2)));
-            prods.add(new Products("Sirap", 27, 16, "Seg sirap. Perfekt för matlagning!", cats.get(2)));
-            prods.add(new Products("Skogaholmslimpa", 18f, 12, "Bröd bakat på vete, siktat rågmjöl och sirap, "
-                    + "vilket ger en mjuk och saftig limpa som smakar som en limpa ska smaka.", cats.get(2)));
+            prods.add(new Products("Crossway Striker Gent 18", 4499, 15, "En mycket långsam cykel.", cats.get(0)));
+            prods.add(new Products("SC Trainer FF MNS 19", 3499, 3, "Docka för barn mellan 3-10 år.", cats.get(0)));
+            prods.add(new Products("Crossway Striker Lady 18", 550000, 35, "Dyrast cykel vi har", cats.get(0)));
+            prods.add(new Products("Vilma 28 3s classic 19", 3499, 4, "En väldigt snabb cykel för de som gillar fart!", cats.get(1)));
+            prods.add(new Products("Live 7 18", 4299, 5, "Elegant och klassisk stadscykel för damer.", cats.get(1)));
+            prods.add(new Products("Vilma 26 3s classic 19", 2999, 2, "Tandemcykel som är perfekt för par.", cats.get(1)));
+            prods.add(new Products("XC 260 Pro 19", 4499, 78, "Juniorcykel med 26\"-hjul. Perfekt storlek för ungdomar.", cats.get(2)));
+            prods.add(new Products("XC 240 Lite 19", 3499, 28, "Lätt cykel för juniorer, lättare än vanliga 24-tumscyklar.", cats.get(2)));
+            prods.add(new Products("HYB TERU B2", 27990, 17, "Elektrisk terrängcykel med kraftig Bosch-motor och låg vikt.", cats.get(3)));
+            prods.add(new Products("XC-E Trainer 275 19 EU", 14990, 32, "Mycket välutrustad elcykel, perfekt för turer, fritid, pendling och terräng.", cats.get(3)));
+            prods.add(new Products("6 Fat Pro 19", 11990, 16, "Sjätte generationens fatbike från White.", cats.get(4)));
+            prods.add(new Products("6 Fat Lite NX", 9999, 12, "Mycket bra bärförmåga på de breda däcken.", cats.get(4)));
             
             for (int i = 0; i < prods.size(); i++) {
                 productsFacade.create(prods.get(i));
