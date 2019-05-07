@@ -165,13 +165,19 @@ public class Controller implements Serializable {
         databaseController.addCustomerInformation(cust, mail);
     }
     
-    public void addAccountWithCustomerInformation() {
+    public String addAccountWithCustomerInformation() {
         cust = new Customer(fname, ename, phoneNumber, address, postalCode, city, country, 0);
         acc = new Account(mail, pass, "regular", cust);
         if (!accountFacade.register(acc)) {
             String message = "Registrering misslyckades! E-postadressen är upptagen!";
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
             FacesContext.getCurrentInstance().addMessage("form:email", msg);
+            return "register";
+        }
+        else {
+            databaseController.checkLogin(acc);
+            checkLogin();
+            return "index";
         }
     }
     

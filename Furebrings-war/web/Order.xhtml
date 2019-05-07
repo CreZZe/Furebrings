@@ -14,7 +14,12 @@
             <ui:define name="content">
                 
                 <div class="row">
-                    <h1>Genomför köp</h1>
+                    <h1>HÄR FYLLER MAN INFORMATION FÖR KÖP</h1>
+                    <f:view>
+                        <h:form>
+                            <h:commandButton value="Genomför köp" action="#{cartController.createOrder}"></h:commandButton>
+                        </h:form>
+                    </f:view>
                 </div>
                 
             </ui:define>

@@ -19,7 +19,7 @@
                     <h2>KUNDVAGN</h2>
                     <f:view>
                         <h:form>
-                            <h:commandButton value="Genomför köp" action="#{cartController.createOrder}"
+                            <h:commandButton value="Gå Vidare" action="#{cartController.toOrderPage}"
                                              rendered="#{cartController.cartProducts.size() > 0}"></h:commandButton>
                         </h:form>
                     </f:view>

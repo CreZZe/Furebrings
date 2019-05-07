@@ -22,6 +22,8 @@ public class Orders implements Serializable {
     private Long id;
     
     private boolean isPremium;
+    private String paymentOption;
+    private String shipment;
     
     @ManyToOne(cascade=MERGE)
     private Customer customer;
@@ -38,6 +40,13 @@ public class Orders implements Serializable {
 
     public Orders(boolean isPremium, Customer customer) {
         this.isPremium = isPremium;
+        this.customer = customer;
+    }
+
+    public Orders(boolean isPremium, String paymentOption, String shipment, Customer customer) {
+        this.isPremium = isPremium;
+        this.paymentOption = paymentOption;
+        this.shipment = shipment;
         this.customer = customer;
     }
     
@@ -71,6 +80,22 @@ public class Orders implements Serializable {
 
     public void setIsPremium(boolean isPremium) {
         this.isPremium = isPremium;
+    }
+
+    public String getPaymentOption() {
+        return paymentOption;
+    }
+
+    public void setPaymentOption(String paymentOption) {
+        this.paymentOption = paymentOption;
+    }
+
+    public String getShipment() {
+        return shipment;
+    }
+
+    public void setShipment(String shipment) {
+        this.shipment = shipment;
     }
 
     @Override

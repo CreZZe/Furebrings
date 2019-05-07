@@ -29,6 +29,9 @@ public class CartController implements Serializable {
     @Inject
     private Controller controller;
     
+    private String paymentOption;
+    private String shipment;
+    
     private List<CartProduct> cartProducts = new ArrayList<>(Arrays.asList(
             new CartProduct("Lägg till produkt", 0, 0)
     ));
@@ -47,6 +50,22 @@ public class CartController implements Serializable {
 
     public void setCartProducts(List<CartProduct> cartProducts) {
         this.cartProducts = cartProducts;
+    }
+
+    public String getPaymentOption() {
+        return paymentOption;
+    }
+
+    public void setPaymentOption(String paymentOption) {
+        this.paymentOption = paymentOption;
+    }
+
+    public String getShipment() {
+        return shipment;
+    }
+
+    public void setShipment(String shipment) {
+        this.shipment = shipment;
     }
     
     
@@ -104,9 +123,17 @@ public class CartController implements Serializable {
         });
     }
     
+    public String toOrderPage() {
+        if (controller.getAccountDB() == null)
+            return "login";
+        
+        return "order";
+    }
+    
     public String createOrder() {
-        if ( databaseController.placeOrder(controller.getAccountDB()) )
-            return "order";
-        return "cart";
+        if ( databaseController.placeOrder(controller.getAccountDB(), paymentOption, shipment) )
+            return "orderconfirm";
+        
+        return "order";
     }
 }

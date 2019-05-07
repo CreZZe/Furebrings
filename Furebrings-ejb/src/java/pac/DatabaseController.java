@@ -245,6 +245,42 @@ public class DatabaseController implements DatabaseControllerLocal {
         
         return true;
     }
+
+    @Override
+    public boolean placeOrder(Account acc, String paymentOption, String shipment) {
+        Orders order;
+        
+        if (acc.getAccRole().equals("premium")) {
+            order = new Orders(true, paymentOption, shipment, acc.getCustomer());
+            order.setOrderDetails(cartProductRow);
+            persist(order);
+            
+            /*
+                Ändra kostnaden för premiumkunder
+            tempOrder.getOrderDetails().forEach((tempOD) -> {
+                tempOD.getProduct().setCost(tempOD.getProduct().getCost() * 0.9f);
+            });*/
+            
+            cartProductRow.forEach((prod) -> {
+                prod.setOrder(order);
+                persist(prod);
+            });
+        }
+        else {
+            order = new Orders(false, paymentOption, shipment, acc.getCustomer());
+            order.setOrderDetails(cartProductRow);
+            persist(order);
+            
+            cartProductRow.forEach((prod) -> {
+                prod.setOrder(order);
+                persist(prod);
+            });
+        }
+        
+        return true;
+    }
+    
+    
     
     
     
