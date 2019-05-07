@@ -17,6 +17,11 @@
                             <h:dataTable value="#{productController.chosenProduct}" var="Product"
                                          border="5" bgcolor="white" cellpadding="10">
                                 <h:column>
+                                    <h:graphicImage library="images" name="bicycle-161315_1280.png" width="300" rendered="#{Product.id % 3 == 0}"/>
+                                    <h:graphicImage library="images" name="bicycle-161524_1280.png" width="300" rendered="#{Product.id % 3 == 1}"/>
+                                    <h:graphicImage library="images" name="png-2757379_1280.png" width="300" rendered="#{Product.id % 3 == 2}"/>
+                                </h:column>
+                                <h:column>
                                     <f:facet name="header">Produkt</f:facet>
                                     <h:outputText id="o1" value="#{Product.name}"></h:outputText>
                                 </h:column>
