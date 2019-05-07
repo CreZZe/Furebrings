@@ -1,6 +1,7 @@
 package pac;
 
 import ejb.AccountFacade;
+import ejb.CategoriesFacade;
 import entities.Products;
 import ejb.ProductsFacade;
 import entities.Account;
@@ -26,8 +27,11 @@ import javax.ejb.EJB;
 public class ProductController implements Serializable {
 
     @EJB
-    private AccountFacade accountFacade;
+    private CategoriesFacade categoriesFacade;
 
+    @EJB
+    private AccountFacade accountFacade;
+    
     @EJB
     private ProductsFacade productsFacade;
 
@@ -108,42 +112,54 @@ public class ProductController implements Serializable {
     
     public void init() {
         if (productsFacade.findAll().isEmpty()) {
+            List<Categories> cats = new ArrayList<>();
+            
+            cats.add(new Categories("Leksaker"));
+            cats.add(new Categories("Cyklar"));
+            cats.add(new Categories("Mat"));
+            
+            for (int i = 0; i < cats.size(); i++) {
+                categoriesFacade.create(cats.get(i));
+            }
+
+            List<Products> prods = new ArrayList<>();
+            
+            prods.add(new Products("Brandbil", 29, 15, "Röd brandbil för barn mellan 0-5 år.", cats.get(0)));
+            prods.add(new Products("Docka", 12, 3, "Docka för barn mellan 3-10 år.", cats.get(0)));
+            prods.add(new Products("Studsboll", 20, 35, "Studsboll för barn mellan 10-15 år.", cats.get(0)));
+            prods.add(new Products("Snabb cykel", 1999, 4, "En väldigt snabb cykel för de som gillar fart!", cats.get(1)));
+            prods.add(new Products("Långsam cykel", 999, 5, "En mycket långsam cykel.", cats.get(1)));
+            prods.add(new Products("Tandemcykel", 1490, 2, "Tandemcykel som är perfekt för par.", cats.get(1)));
+            prods.add(new Products("Potatis", 2, 78, "Färskpotatis, perfekt för potatissallader!", cats.get(2)));
+            prods.add(new Products("Gurka", 15, 28, "Gurka från Litauen.", cats.get(2)));
+            prods.add(new Products("Paprika", 8, 17, "Paket innehållande en röd, en grön och en gul paprika.", cats.get(2)));
+            prods.add(new Products("Mjölk", 12, 32, "Lättmjölk från ARLA.", cats.get(2)));
+            prods.add(new Products("Sirap", 27, 16, "Seg sirap. Perfekt för matlagning!", cats.get(2)));
+            prods.add(new Products("Skogaholmslimpa", 18f, 12, "Bröd bakat på vete, siktat rågmjöl och sirap, "
+                    + "vilket ger en mjuk och saftig limpa som smakar som en limpa ska smaka.", cats.get(2)));
+            
+            for (int i = 0; i < prods.size(); i++) {
+                productsFacade.create(prods.get(i));
+            }
+            
             Customer cust = new Customer("Mikael", "Fredriksson", "0737777777", "Toppartorp 123", "19333", "Stockholm", "Sweden");
             Customer cust2 = new Customer("Göran", "Petterson", "0739231233", "Odengatan 23", "19233", "Stockholm", "Sweden", 550000);
             
-            Orders order1 = new Orders(cust2);
-            Orders order2 = new Orders(cust2);
-
-            Categories cat1 = new Categories("Leksaker");
-            Categories cat2 = new Categories("Cyklar");
-            Categories cat3 = new Categories("Mat");
-
-            Products prod1 = new Products("Brandbil", 29, 15, "Röd brandbil för barn mellan 0-5 år.", cat1);
-            Products prod2 = new Products("Docka", 12, 3, "Docka för barn mellan 3-10 år.", cat1);
-            Products prod3 = new Products("Studsboll", 20, 35, "Studsboll för barn mellan 10-15 år.", cat1);
-            Products prod4 = new Products("Snabb cykel", 1999, 4, "En väldigt snabb cykel för de som gillar fart!", cat2);
-            Products prod5 = new Products("Långsam cykel", 999, 5, "En mycket långsam cykel.", cat2);
-            Products prod6 = new Products("Tandemcykel", 1490, 2, "Tandemcykel som är perfekt för par.", cat2);
-            Products prod7 = new Products("Potatis", 2, 78, "Färskpotatis, perfekt för potatissallader!", cat3);
-            Products prod8 = new Products("Gurka", 15, 28, "Gurka från Litauen.", cat3);
-            Products prod9 = new Products("Paprika", 8, 17, "Paket innehållande en röd, en grön och en gul paprika.", cat3);
-            Products prod10 = new Products("Mjölk", 12, 32, "Lättmjölk från ARLA.", cat3);
-            Products prod11 = new Products("Sirap", 27, 16, "Seg sirap. Perfekt för matlagning!", cat3);
-            Products prod12 = new Products("Skogaholmslimpa", 18f, 12, "Bröd bakat på vete, siktat rågmjöl och sirap, "
-                    + "vilket ger en mjuk och saftig limpa som smakar som en limpa ska smaka.", cat3);
-
-            OrderDetails det1 = new OrderDetails(prod1, 4, order1);
-            OrderDetails det2 = new OrderDetails(prod2, 2, order1);
-            OrderDetails det3 = new OrderDetails(prod3, 5, order1);
-            OrderDetails det4 = new OrderDetails(prod4, 4, order1);
-            OrderDetails det5 = new OrderDetails(prod5, 2, order1);
-            OrderDetails det6 = new OrderDetails(prod6, 5, order1);
-            OrderDetails det7 = new OrderDetails(prod7, 4, order2);
-            OrderDetails det8 = new OrderDetails(prod8, 2, order2);
-            OrderDetails det9 = new OrderDetails(prod9, 5, order2);
-            OrderDetails det10 = new OrderDetails(prod10, 4, order2);
-            OrderDetails det11 = new OrderDetails(prod11, 2, order2);
-            OrderDetails det12 = new OrderDetails(prod12, 5, order2);
+            Orders order1 = new Orders(true, cust2);
+            Orders order2 = new Orders(true, cust2);
+            
+            OrderDetails det1 = new OrderDetails(prods.get(0), 4, order1);
+            OrderDetails det2 = new OrderDetails(prods.get(1), 2, order1);
+            OrderDetails det3 = new OrderDetails(prods.get(2), 5, order1);
+            OrderDetails det4 = new OrderDetails(prods.get(3), 4, order1);
+            OrderDetails det5 = new OrderDetails(prods.get(4), 2, order1);
+            OrderDetails det6 = new OrderDetails(prods.get(5), 5, order1);
+            OrderDetails det7 = new OrderDetails(prods.get(6), 4, order2);
+            OrderDetails det8 = new OrderDetails(prods.get(7), 2, order2);
+            OrderDetails det9 = new OrderDetails(prods.get(8), 5, order2);
+            OrderDetails det10 = new OrderDetails(prods.get(9), 4, order2);
+            OrderDetails det11 = new OrderDetails(prods.get(10), 2, order2);
+            OrderDetails det12 = new OrderDetails(prods.get(11), 5, order2);
 
             List<OrderDetails> details1 = new ArrayList<>();
             details1.add(det1);

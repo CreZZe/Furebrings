@@ -81,14 +81,18 @@
         <from-view-id>/Cart.xhtml</from-view-id>
         
         <navigation-case>
-            <from-action>order</from-action>
+            <from-outcome>order</from-outcome>
             <to-view-id>/Order.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>cart</from-outcome>
+            <to-view-id>/Cart.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/ProductPage.xhtml</from-view-id>
         <navigation-case>
-            <from-action>item</from-action>
+            <from-outcome>item</from-outcome>
             <to-view-id>/Product.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>

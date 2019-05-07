@@ -21,6 +21,8 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    private boolean isPremium;
+    
     @ManyToOne(cascade=MERGE)
     private Customer customer;
     
@@ -31,6 +33,11 @@ public class Orders implements Serializable {
     }
 
     public Orders(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Orders(boolean isPremium, Customer customer) {
+        this.isPremium = isPremium;
         this.customer = customer;
     }
     
@@ -57,8 +64,14 @@ public class Orders implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    
-    
+
+    public boolean isIsPremium() {
+        return isPremium;
+    }
+
+    public void setIsPremium(boolean isPremium) {
+        this.isPremium = isPremium;
+    }
 
     @Override
     public int hashCode() {

@@ -20,19 +20,19 @@
                             <h:dataTable value="#{productController.filteredProducts}" var="Product"
                                          border="5" bgcolor="white" cellpadding="10" rendered="#{productController.filteredProducts.size() > 0}">
                                 <h:column>
-                                    <f:facet name="header">Name</f:facet>
+                                    <f:facet name="header">Produkt</f:facet>
                                     <h:outputText id="o1" value="#{Product.name}"></h:outputText>
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header">Category</f:facet>
+                                    <f:facet name="header">Kategori</f:facet>
                                     <h:outputText id="o2" value="#{Product.category.name}"></h:outputText>
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header">Price</f:facet>
+                                    <f:facet name="header">Pris</f:facet>
                                     <h:outputText id="o3" value="#{Product.cost}"></h:outputText>
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header">Quantity In Store</f:facet>
+                                    <f:facet name="header">Lagersaldo</f:facet>
                                     <h:outputText id="o4" value="#{Product.quantityInStore}"></h:outputText>
                                 </h:column>
                                 <h:column>

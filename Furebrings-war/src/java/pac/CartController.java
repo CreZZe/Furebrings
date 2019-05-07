@@ -104,7 +104,9 @@ public class CartController implements Serializable {
         });
     }
     
-    public void createOrder() {
-        databaseController.placeOrder(controller.getAccountDB());
+    public String createOrder() {
+        if ( databaseController.placeOrder(controller.getAccountDB()) )
+            return "order";
+        return "cart";
     }
 }

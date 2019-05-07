@@ -26,7 +26,6 @@ public class DatabaseController implements DatabaseControllerLocal {
     private EntityManager em;
 
     private Account accountDB;
-    private Orders order;
     private List<OrderDetails> cartProductRow = new ArrayList<>();
     
     public void persist(Object object) {
@@ -109,7 +108,7 @@ public class DatabaseController implements DatabaseControllerLocal {
             }
         }
         
-        cartProductRow.add(new OrderDetails(prod, quantity, order));
+        cartProductRow.add(new OrderDetails(quantity, prod));
         
         return cartProductRow.size() > sizeBefore;
     }
@@ -214,46 +213,39 @@ public class DatabaseController implements DatabaseControllerLocal {
     }
 
     @Override
-    public boolean createOrder() {
-        if (getAccountRole().equals("premium")) {
-            order.setOrderDetails(cartProductRow);
-            Orders tempOrder = order;
-            
-            tempOrder.getOrderDetails().forEach((tempOD) -> {
-                tempOD.getProduct().setCost(tempOD.getProduct().getCost() * 0.9f);
-            });
-            
-            persist(tempOrder);
-        }
-        else
-            persist(order);
-        
-        return false;
-    }
-
-    @Override
     public boolean placeOrder(Account acc) {
+        Orders order;
+        
         if (acc.getAccRole().equals("premium")) {
-            if (order == null) {
-                order = new Orders(acc.getCustomer());
-            }
+            order = new Orders(true, acc.getCustomer());
             order.setOrderDetails(cartProductRow);
             Orders tempOrder = order;
+            persist(tempOrder);
             
+            /*
+                Ändra kostnaden för premiumkunder
             tempOrder.getOrderDetails().forEach((tempOD) -> {
                 tempOD.getProduct().setCost(tempOD.getProduct().getCost() * 0.9f);
-            });
+            });*/
             
-            persist(order);
             cartProductRow.forEach((prod) -> {
-                prod.setOrder(order);
+                prod.setOrder(tempOrder);
                 persist(prod);
             });
         }
-        else
-            persist(order);
+        else {
+            order = new Orders(false, acc.getCustomer());
+            order.setOrderDetails(cartProductRow);
+            Orders tempOrder = order;
+            persist(tempOrder);
+            
+            cartProductRow.forEach((prod) -> {
+                prod.setOrder(tempOrder);
+                persist(prod);
+            });
+        }
         
-        return false;
+        return true;
     }
     
     
