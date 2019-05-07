@@ -8,7 +8,9 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UICommand;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -166,7 +168,11 @@ public class Controller implements Serializable {
     public void addAccountWithCustomerInformation() {
         cust = new Customer(fname, ename, phoneNumber, address, postalCode, city, country, 0);
         acc = new Account(mail, pass, "regular", cust);
-        accountFacade.register(acc);
+        if (!accountFacade.register(acc)) {
+            String message = "Registrering misslyckades! E-postadressen är upptagen!";
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
+            FacesContext.getCurrentInstance().addMessage("form:email", msg);
+        }
     }
     
     public String login() {
