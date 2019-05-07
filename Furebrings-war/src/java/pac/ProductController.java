@@ -132,7 +132,7 @@ public class ProductController implements Serializable {
             List<Products> prods = new ArrayList<>();
             
             prods.add(new Products("Crossway Striker Gent 18", 4499, 15, "En mycket långsam cykel.", cats.get(0)));
-            prods.add(new Products("SC Trainer FF MNS 19", 3499, 3, "Docka för barn mellan 3-10 år.", cats.get(0)));
+            prods.add(new Products("SC Trainer FF MNS 19", 3499, 3, "Vanlig hybridcykel", cats.get(0)));
             prods.add(new Products("Crossway Striker Lady 18", 550000, 35, "Dyrast cykel vi har", cats.get(0)));
             prods.add(new Products("Vilma 28 3s classic 19", 3499, 4, "En väldigt snabb cykel för de som gillar fart!", cats.get(1)));
             prods.add(new Products("Live 7 18", 4299, 5, "Elegant och klassisk stadscykel för damer.", cats.get(1)));
