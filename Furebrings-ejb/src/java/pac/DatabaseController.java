@@ -1,6 +1,7 @@
 package pac;
 
 import classes.CartProduct;
+import ejb.ProductsFacade;
 import entities.Account;
 import entities.Customer;
 import entities.OrderDetails;
@@ -8,6 +9,7 @@ import entities.Orders;
 import entities.Products;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -21,6 +23,9 @@ import javax.persistence.Query;
  */
 @Stateful
 public class DatabaseController implements DatabaseControllerLocal {
+
+    @EJB
+    private ProductsFacade productsFacade;
 
     @PersistenceContext(unitName = "Furebrings-ejbPU")
     private EntityManager em;
@@ -228,30 +233,46 @@ public class DatabaseController implements DatabaseControllerLocal {
     public boolean placeOrder(Account acc, String paymentOption, String shipment) {
         Orders order;
         
-        if (acc.getAccRole().equals("premium")) {
-            order = new Orders(true, paymentOption, shipment, acc.getCustomer());
-            order.setOrderDetails(cartProductRow);
-            persist(order);
+        try {
+            if (acc.getAccRole().equals("premium")) {
+                order = new Orders(true, paymentOption, shipment, acc.getCustomer());
+                order.setOrderDetails(cartProductRow);
+                persist(order);
+
+                cartProductRow.forEach((orderRad) -> {
+                    orderRad.setOrder(order);
+                    persist(orderRad);
+                    
+                    Products prod = orderRad.getProduct();
+                    Products prodDB = productsFacade.findProductByName(prod.getName());
+                    
+                    prodDB.setQuantityInStore(prodDB.getQuantityInStore() - orderRad.getQuantity());
+                    productsFacade.edit(prodDB);
+                });
+            }
+            else {
+                order = new Orders(false, paymentOption, shipment, acc.getCustomer());
+                order.setOrderDetails(cartProductRow);
+                persist(order);
+
+                cartProductRow.forEach((orderRad) -> {
+                    orderRad.setOrder(order);
+                    persist(orderRad);
+                    
+                    Products prod = orderRad.getProduct();
+                    Products prodDB = productsFacade.findProductByName(prod.getName());
+                    
+                    prodDB.setQuantityInStore(prodDB.getQuantityInStore() - orderRad.getQuantity());
+                    productsFacade.edit(prodDB);
+                });
+            }
             
-            cartProductRow.forEach((prod) -> {
-                prod.setOrder(order);
-                persist(prod);
-                // TA BORT UR LAGER OCKSÅ
-            });
+            cartProductRow = new ArrayList<>();
+            return true;
         }
-        else {
-            order = new Orders(false, paymentOption, shipment, acc.getCustomer());
-            order.setOrderDetails(cartProductRow);
-            persist(order);
-            
-            cartProductRow.forEach((prod) -> {
-                prod.setOrder(order);
-                persist(prod);
-                // TA BORT UR LAGER OCKSÅ
-            });
-        }
-        
-        return true;
+        catch (Exception e) {
+            return false;
+        }        
     }
 
     @Override

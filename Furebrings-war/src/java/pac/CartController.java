@@ -29,6 +29,9 @@ public class CartController implements Serializable {
     @Inject
     private Controller controller;
     
+    @Inject
+    private ProductController prodController;
+    
     private String paymentOption;
     private String shipment;
     
@@ -138,8 +141,10 @@ public class CartController implements Serializable {
     }
     
     public String createOrder() {
-        if ( databaseController.placeOrder(controller.getAccountDB(), paymentOption, shipment) )
+        if ( databaseController.placeOrder(controller.getAccountDB(), paymentOption, shipment) ) {
+            prodController.fetchAllProducts();
             return "orderconfirm";
+        }
         
         return "order";
     }
