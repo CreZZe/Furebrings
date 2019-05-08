@@ -1,0 +1,74 @@
+
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    
+}
+
+.wrapper2 {
+    
+    box-sizing: border-box;
+    padding: 15px;
+    
+}
+
+.totalprice{
+    
+    font-size: 20px;
+    font-color: red;
+    align-content: center;
+    
+}
+
+.box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+     align-items: center;
+     
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+     
+}
+.pricing{
+    width: 350px;
+    padding: 5px;
+    box-sizing: border-box;
+    
+        
+}
+
+
+.cat li {
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.catbox {
+    display: inline-block;
+}
+
+.width {
+    text-align: center;
+}
+
+.catheader {
+    background-color: blue;
+}
+
+nav {
+    border-bottom: 4px black solid;
+}
+

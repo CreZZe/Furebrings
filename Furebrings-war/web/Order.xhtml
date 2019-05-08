@@ -4,23 +4,76 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-<!--    <h:head>       
+        <h:head>
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"></link>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- CDN path to Fontawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"></link>
+        <!-- Own CSS-file -->
+        <link rel="stylesheet" href="style.css"></link>
+
         <title>Facelet Title</title>
-    </h:head>-->
+    </h:head>
     <h:body>
 
         <ui:composition template="./resources/template.xhtml">
-            
+
             <ui:define name="content">
-                
+
                 <div class="row">
                     <h1>Genomför köp</h1>
                 </div>
-                
+                <f:view>
+                    <div class="wrapper2">
+                    <h:form>
+                        
+                            <div class="totalprice"><h:outputLabel value="Totalt Pris: #{cartController.totalPrice}"></h:outputLabel></div>
+                            <p>Namn <input type="text" name="name" /></p>
+                            <p>Adress <input type="text" name="Address" /></p>
+                            <p>Postnummer <input type="text" name="postcode" /></p>
+                            <p>Ort <input type="text" name="City" /></p>
+                            <p>Telefonnummer <input type="text" name="phone" /></p>
+                            <p>E-post <input type="text" name="email" /></p>
+                            <p>Meddelande <input type="text" name="message" size="250" value="" /></p>
+                            
+                            <p>Betalningsmetod</p>
+                            <h:selectOneMenu value="#{betalning.betalning}">
+                        <f:selectItems value="#{betalning.betalning}" />
+                    </h:selectOneMenu>
+                    
+                    <h:selectOneMenu value="#{betalning.betalning}">
+                        <f:selectItem itemValue="#{betalning.faktura}" itemLabel="Faktura" />
+                        <f:selectItem itemValue="#{betalning.kort}" itemLabel="Kort" />
+                        <f:selectItem itemValue="#{betalning.swish}" itemLabel="Swish" />
+   		</h:selectOneMenu>
+                            
+                            
+   		
+	        <br /><br />
+	    
+    	        <h:commandButton value="Submit" action="result" />
+	        <h:commandButton value="Reset" type="reset" />
+                            
+                            <p>Leveransmetod<br /></p>
+                            <h:selectOneRadio>
+                            <input type="radio" name="leverans" value="int"  />Avhämning<br />
+                            <input type="radio" name="leverans" value="adv" />Standardleverans<br />
+                            <input type="radio" name="leverans" value="sup" />Expressleverans<br />
+                            </h:selectOneRadio>
+
+                            <h:commandButton action ="order" value="Genomför köp" /><br />
+                        
+                    </h:form>
+                        </div>
+                </f:view>
+
             </ui:define>
-            
+
         </ui:composition>
-        
+
     </h:body>
 </html>
 
