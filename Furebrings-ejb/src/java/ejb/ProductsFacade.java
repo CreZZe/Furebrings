@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -35,5 +36,17 @@ public class ProductsFacade extends AbstractFacade<Products> {
                     "where lower(o.name) like :name")
                     .setParameter("name","%" + name.toLowerCase() + "%")
                     .getResultList();       
+    }
+    
+    public Products findProductByName(String name) {
+        Query q = em.createQuery("SELECT p FROM Products p WHERE p.name =:name");
+        q.setParameter("name", name);
+        
+        try {
+            return (Products) q.getSingleResult();
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
 }

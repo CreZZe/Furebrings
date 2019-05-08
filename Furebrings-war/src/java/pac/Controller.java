@@ -47,9 +47,7 @@ public class Controller implements Serializable {
     private Customer cust;
     
     private UICommand logoutLink;
-    private UICommand loginLink;
-    
-    private String koala;
+    private UICommand loginLink;    
     /**
      * Creates a new instance of Controller
      */
@@ -231,9 +229,5 @@ public class Controller implements Serializable {
      
     public Account getAccountDB() {
         return databaseController.getAccountDB();
-    }
-
-    public String getKoala() {
-        return koala;
     }
 }

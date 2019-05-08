@@ -37,4 +37,6 @@ public interface DatabaseControllerLocal {
     void setAccountDB(Account accountDB);
 
     boolean placeOrder(Account acc, String paymentOption, String shipment);
+
+    List<CartProduct> getCartProducts(Account acc);
 }

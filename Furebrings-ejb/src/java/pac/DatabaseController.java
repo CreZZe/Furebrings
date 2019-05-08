@@ -180,8 +180,22 @@ public class DatabaseController implements DatabaseControllerLocal {
 
         for (int i = 0; i < cartProductRow.size(); i++) {
             OrderDetails item = cartProductRow.get(i);
-            CartProduct prod = new CartProduct(item.getProduct().getName(), 
-            item.getProduct().getCost(), item.getQuantity());
+            
+            CartProduct prod;
+            if (getAccountDB()!= null) {
+                if (getAccountRole().equals("premium")) {
+                    prod = new CartProduct(item.getProduct().getName(), 
+                    item.getProduct().getCost() * 0.9f, item.getQuantity());
+                }
+                else {
+                    prod = new CartProduct(item.getProduct().getName(), 
+                    item.getProduct().getCost(), item.getQuantity());
+                }
+            }
+            else {
+                prod = new CartProduct(item.getProduct().getName(), 
+                item.getProduct().getCost(), item.getQuantity());
+            }
             cartProducts.add(prod);
         }
         
@@ -238,6 +252,34 @@ public class DatabaseController implements DatabaseControllerLocal {
         }
         
         return true;
+    }
+
+    @Override
+    public List<CartProduct> getCartProducts(Account acc) {
+        List<CartProduct> cartProducts = new ArrayList<>();
+
+        for (int i = 0; i < cartProductRow.size(); i++) {
+            OrderDetails item = cartProductRow.get(i);
+            
+            CartProduct prod;
+            if (acc != null) {
+                if (acc.getAccRole().equals("premium")) {
+                    prod = new CartProduct(item.getProduct().getName(), 
+                    item.getProduct().getCost() * 0.9f, item.getQuantity());
+                }
+                else {
+                    prod = new CartProduct(item.getProduct().getName(), 
+                    item.getProduct().getCost(), item.getQuantity());
+                }
+            }
+            else {
+                prod = new CartProduct(item.getProduct().getName(), 
+                item.getProduct().getCost(), item.getQuantity());
+            }
+            cartProducts.add(prod);
+        }
+        
+        return cartProducts;
     }
     
     

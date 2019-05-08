@@ -70,7 +70,9 @@ public class CartController implements Serializable {
     
     
     public String productsFromCart() {
-        cartProducts = databaseController.getProductsFromCart();
+        //cartProducts = databaseController.getProductsFromCart();
+        cartProducts = databaseController.getCartProducts(controller.getAccountDB());
+        
         return "cart";
     }
     /*
@@ -81,10 +83,15 @@ public class CartController implements Serializable {
     */
     
     // Bygga ihop prod-objektet på frontend eller backend??
-    public String addToCart(Products item) {
+    public String addToCart(Products prod) {
+        Products item = productsFacade.findProductByName(prod.getName());
+        if (item == null) {
+            return "productpage";
+        }
+        
         if (databaseController.getQuantity(item) > databaseController.getQuantityOfProductInCart(item)) {
             if (databaseController.addProductToCart(item, 1)) {
-                cartProducts = databaseController.getProductsFromCart();
+                cartProducts = databaseController.getCartProducts(controller.getAccountDB());
                 calcTotalPrice();
                 return "cart";
             }
@@ -94,7 +101,7 @@ public class CartController implements Serializable {
     
     public String cartQuantityIncrement(CartProduct cartProd) {
         if (databaseController.cartQuantityIncrement(productsFacade.findProductsByName(cartProd.getName()).get(0))) {
-            cartProducts = databaseController.getProductsFromCart();
+            cartProducts = databaseController.getCartProducts(controller.getAccountDB());
             calcTotalPrice();
         }
         return "cart";
@@ -102,7 +109,7 @@ public class CartController implements Serializable {
     
     public String cartQuantityDecrement(CartProduct cartProd) {
         if (databaseController.cartQuantityDecrement(productsFacade.findProductsByName(cartProd.getName()).get(0))) {
-            cartProducts = databaseController.getProductsFromCart();
+            cartProducts = databaseController.getCartProducts(controller.getAccountDB());
             calcTotalPrice();
         }
         return "cart";
