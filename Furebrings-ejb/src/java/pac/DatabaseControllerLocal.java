@@ -36,7 +36,5 @@ public interface DatabaseControllerLocal {
 
     void setAccountDB(Account accountDB);
 
-    boolean placeOrder(Account acc);
-
     boolean placeOrder(Account acc, String paymentOption, String shipment);
 }

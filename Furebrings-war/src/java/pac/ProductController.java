@@ -1,5 +1,6 @@
 package pac;
 
+import classes.CartProduct;
 import ejb.AccountFacade;
 import ejb.CategoriesFacade;
 import entities.Products;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -35,6 +37,9 @@ public class ProductController implements Serializable {
     @EJB
     private ProductsFacade productsFacade;
 
+    @Inject
+    private Controller controller;
+    
     private List<Products> allProducts;
     private List<Products> filteredProducts;
     private String searchName;
@@ -43,9 +48,17 @@ public class ProductController implements Serializable {
     @PostConstruct
     public void fetchAllProducts(){
         init();
-        allProducts = productsFacade.findAll();
-        //filteredProducts = allProducts;
+        List<Products> tempList = productsFacade.findAll();
         
+        if (controller.getAccountDB() != null) {
+            if (controller.getAccountDB().getAccRole().equals("premium")) {
+                for (Products prod : tempList) {
+                    prod.setCost(prod.getCost() * 0.9f);
+                }
+            }
+        }
+        
+        allProducts = tempList;
     }
     
     public void fetchProductsByName(String name){

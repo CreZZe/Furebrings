@@ -11,6 +11,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UICommand;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -25,6 +26,9 @@ public class Controller implements Serializable {
 
     @EJB
     private DatabaseControllerLocal databaseController;
+    
+    @Inject
+    private ProductController prodController;
     
     private Account acc;
     private String mail;
@@ -44,6 +48,8 @@ public class Controller implements Serializable {
     
     private UICommand logoutLink;
     private UICommand loginLink;
+    
+    private String koala;
     /**
      * Creates a new instance of Controller
      */
@@ -190,6 +196,7 @@ public class Controller implements Serializable {
             */ 
         String result = databaseController.checkLogin(acc);
         checkLogin();
+        prodController.fetchAllProducts();
         return result;
     }
     
@@ -218,10 +225,15 @@ public class Controller implements Serializable {
     public String logout(){
         databaseController.setAccountDB(null);
         checkLogin();
+        prodController.fetchAllProducts();
         return "index";
     }
      
     public Account getAccountDB() {
         return databaseController.getAccountDB();
+    }
+
+    public String getKoala() {
+        return koala;
     }
 }

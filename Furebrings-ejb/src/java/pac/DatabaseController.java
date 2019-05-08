@@ -66,14 +66,12 @@ public class DatabaseController implements DatabaseControllerLocal {
                 String role = accDB.getAccRole();
                 System.out.println(accDB.getAccRole());
                 
-                if (role.equals("regular") || role.equals("premium")) {
-                    //order = new Orders(accDB.getCustomer());
-                    return "index";
-                }
-                else if (role.equals("admin")) {
-                    //order = new Orders(accDB.getCustomer());
+                if (role.equals("regular"))
+                    return "regular";
+                if (role.equals("premium"))
+                    return "premium";
+                else if (role.equals("admin")) 
                     return "admin"; 
-                }
             }
         }
         catch (Exception e) {
@@ -81,10 +79,10 @@ public class DatabaseController implements DatabaseControllerLocal {
             String message = "Inloggning misslyckades, se över dina uppgifter.";
             FacesMessage msg= new FacesMessage(FacesMessage.SEVERITY_ERROR,message,null);
             FacesContext.getCurrentInstance().addMessage("form:loggain", msg);
-            return null;
+            return "null";
         }
         
-        return null;
+        return "null";
     }
 
     @Override
@@ -213,40 +211,6 @@ public class DatabaseController implements DatabaseControllerLocal {
     }
 
     @Override
-    public boolean placeOrder(Account acc) {
-        Orders order;
-        
-        if (acc.getAccRole().equals("premium")) {
-            order = new Orders(true, acc.getCustomer());
-            order.setOrderDetails(cartProductRow);
-            persist(order);
-            
-            /*
-                Ändra kostnaden för premiumkunder
-            tempOrder.getOrderDetails().forEach((tempOD) -> {
-                tempOD.getProduct().setCost(tempOD.getProduct().getCost() * 0.9f);
-            });*/
-            
-            cartProductRow.forEach((prod) -> {
-                prod.setOrder(order);
-                persist(prod);
-            });
-        }
-        else {
-            order = new Orders(false, acc.getCustomer());
-            order.setOrderDetails(cartProductRow);
-            persist(order);
-            
-            cartProductRow.forEach((prod) -> {
-                prod.setOrder(order);
-                persist(prod);
-            });
-        }
-        
-        return true;
-    }
-
-    @Override
     public boolean placeOrder(Account acc, String paymentOption, String shipment) {
         Orders order;
         
@@ -255,15 +219,10 @@ public class DatabaseController implements DatabaseControllerLocal {
             order.setOrderDetails(cartProductRow);
             persist(order);
             
-            /*
-                Ändra kostnaden för premiumkunder
-            tempOrder.getOrderDetails().forEach((tempOD) -> {
-                tempOD.getProduct().setCost(tempOD.getProduct().getCost() * 0.9f);
-            });*/
-            
             cartProductRow.forEach((prod) -> {
                 prod.setOrder(order);
                 persist(prod);
+                // TA BORT UR LAGER OCKSÅ
             });
         }
         else {
@@ -274,6 +233,7 @@ public class DatabaseController implements DatabaseControllerLocal {
             cartProductRow.forEach((prod) -> {
                 prod.setOrder(order);
                 persist(prod);
+                // TA BORT UR LAGER OCKSÅ
             });
         }
         
