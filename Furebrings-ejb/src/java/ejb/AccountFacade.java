@@ -47,4 +47,17 @@ public class AccountFacade extends AbstractFacade<Account> {
             }
         }
     } 
+    
+    public Account findAccountByMail(String mail) {
+        Query q = em.createQuery("SELECT a FROM Account a WHERE lower(a.mail) =:mail");
+        q.setParameter("mail", mail);
+        
+        try {
+            Account accDB = (Account) q.getSingleResult();
+            return accDB;
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
 }

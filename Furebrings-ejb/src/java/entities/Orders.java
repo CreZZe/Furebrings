@@ -58,7 +58,7 @@ public class Orders implements Serializable {
         this.id = id;
     }
 
-    public List<OrderDetails> getOrderDetails() {
+    public List<OrderDetails> getOrderDetails() {        
         return orderDetails;
     }
 

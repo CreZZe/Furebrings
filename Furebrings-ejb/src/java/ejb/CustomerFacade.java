@@ -9,6 +9,7 @@ import entities.Customer;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +30,16 @@ public class CustomerFacade extends AbstractFacade<Customer> {
         super(Customer.class);
     }
     
+    public Customer findCustomerByName(String fName, String lName) {
+        Query q = em.createQuery("SELECT c FROM Customer c WHERE c.firstName =:firstName AND c.lastName =:lastName");
+        q.setParameter("firstName", fName);
+        q.setParameter("lastName", lName);
+        
+        try {
+            return (Customer) q.getSingleResult();
+        }
+        catch (Exception e) {
+            return null;
+        }
+    }
 }

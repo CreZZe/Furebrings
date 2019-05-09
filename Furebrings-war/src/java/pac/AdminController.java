@@ -3,6 +3,7 @@ package pac;
 import ejb.CustomerFacade;
 import ejb.OrdersFacade;
 import entities.Customer;
+import entities.OrderDetails;
 import entities.Orders;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -24,6 +26,9 @@ public class AdminController implements Serializable {
 
     @EJB
     private CustomerFacade customerFacade;
+    
+    @Inject
+    private Controller controller;
 
     private List<Customer> customers;
     
@@ -83,7 +88,17 @@ public class AdminController implements Serializable {
     }
     
     public String order(Orders order) {
+        customers = customerFacade.findAll();
+
         currentOrder = order;
+        
+        if (currentOrder.isIsPremium()) {
+            for (OrderDetails orderRad : currentOrder.getOrderDetails()) {
+                orderRad.getProduct().setCost(orderRad.getProduct().getCost() * 0.9f);
+            }
+        }
+        
+        
         calcTotalPrice();
         return "userOrder";
     }

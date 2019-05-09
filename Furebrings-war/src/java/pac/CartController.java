@@ -1,7 +1,11 @@
 package pac;
 
 import classes.CartProduct;
+import ejb.AccountFacade;
+import ejb.CustomerFacade;
 import ejb.ProductsFacade;
+import entities.Account;
+import entities.Customer;
 import entities.Products;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -21,6 +25,12 @@ import javax.inject.Inject;
 public class CartController implements Serializable {
 
     @EJB
+    private AccountFacade accountFacade;
+
+    @EJB
+    private CustomerFacade customerFacade;
+
+    @EJB
     private ProductsFacade productsFacade;
 
     @EJB
@@ -31,6 +41,12 @@ public class CartController implements Serializable {
     
     @Inject
     private ProductController prodController;
+    
+    private String phoneNumber;
+    private String address;
+    private String postalCode;
+    private String city;
+    private String country;
     
     private String paymentOption;
     private String shipment;
@@ -45,6 +61,46 @@ public class CartController implements Serializable {
      * Creates a new instance of CartController
      */
     public CartController() {
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public List<CartProduct> getCartProducts() {
@@ -133,7 +189,7 @@ public class CartController implements Serializable {
         });
     }
     
-    public String toOrderPage() {
+    public String toOrderPage() {        
         if (controller.getAccountDB() == null)
             return "login";
         
@@ -141,6 +197,20 @@ public class CartController implements Serializable {
     }
     
     public String createOrder() {
+        System.out.println(phoneNumber + " " + address + " " + postalCode + " " + city + " " + country);
+        
+        Account accDB = accountFacade.findAccountByMail(controller.getAccountDB().getMail());
+        Customer cust = accDB.getCustomer();
+        System.out.println(accDB.getCustomer());
+        
+
+        cust.setAddress(address);
+        cust.setCity(city);
+        cust.setCountry(country);
+        cust.setPhoneNumber(phoneNumber);
+        cust.setPostalCode(postalCode);
+        customerFacade.edit(cust);
+        
         if ( databaseController.placeOrder(controller.getAccountDB(), paymentOption, shipment) ) {
             prodController.fetchAllProducts();
             return "orderconfirm";

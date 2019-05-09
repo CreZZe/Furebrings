@@ -4,6 +4,7 @@ body{
     border: 0;
     background-image: url("images/bicycle-161524_1280.png");
     background-size: cover;
+    margin-bottom: 35px;
 }
 
 .cat li {
@@ -41,4 +42,9 @@ nav {
 
 .center_content{
     padding-bottom: 50px;
+}
+
+[type="radio"]:not(:checked), [type="radio"]:checked {
+    position: relative;
+    opacity: 100;
 }
