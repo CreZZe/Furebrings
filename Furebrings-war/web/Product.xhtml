@@ -43,7 +43,7 @@
                                     <h:outputText id="o5" value="#{Product.description}"></h:outputText>
                                 </h:column>
                                 <h:column>
-                                    <h:commandButton class="btn" value="Add To Cart" action="#{cartController.addToCart(Product)}"></h:commandButton>
+                                    <h:commandButton class="btn" value="Add To Cart" action="#{cartController.addToCart(Product)}" rendered="#{Product.quantityInStore > 0}"></h:commandButton>
                                 </h:column>
                             </h:dataTable>
                         </h:form>
