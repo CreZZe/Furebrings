@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<!--    <h:head>        
+        <title>Login</title>
+    </h:head>-->
+    <h:body>
+        <ui:composition template="./resources/template.xhtml">
+            
+            <ui:define name="content">
+                
+                <div class="container white z-depth-3">
+                    <div class="row">
+                        <f:view>
+                            <h:form id="form">
+                                <div class="row col s6 offset-s2">
+                                    <p>E-postadress:</p>
+                                    <h:inputText class="input-field col s6" id="email" value="#{controller.mail}">
+                                        <f:validator validatorId="emailValidator"></f:validator>
+                                    </h:inputText>
+                                    <h:message for="email" errorStyle="color:red"/>
+                                </div>
+
+                                <div class="row col s6 offset-s2">
+                                    <p>Lösenord:</p>
+                                    <h:inputSecret class="input-field col s6" id="password" value="#{controller.pass}">
+                                        <f:validator validatorId="passwordValidator"></f:validator>
+                                    </h:inputSecret>
+                                    <h:message for="password" errorStyle="color:red"/>
+
+                                </div>
+                                <div class="row col s6 offset-s2">
+                                    <h:commandButton id="loggain" class="btn" value="Logga in" action="#{controller.login()}"></h:commandButton>
+                                    <h:message for="loggain" errorStyle="color:red"/>
+                                </div>
+
+                            </h:form>
+                        </f:view>    
+                        <f:view>
+                            <h:form>
+                                 <div class="row col s6 offset-s2">
+                                    <p>Har du inget konto?</p>
+                                    <h:commandButton value="Skapa konto" class="btn blue" action="signup">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton>
+                                </div>
+                            </h:form>
+                        </f:view>
+                    </div>
+                </div>
+                
+            </ui:define>
+            
+        </ui:composition>
+        
+    </h:body>
+</html>
+

@@ -2,6 +2,7 @@
 package entities;
 
 import java.io.Serializable;
+import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,11 +18,13 @@ public class OrderDetails implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String product; //SKA EGENTLIGEN VARA PRODUCT
     private int quantity;
 
     @ManyToOne(cascade=PERSIST)
     private Orders order;
+    
+    @ManyToOne(cascade=MERGE)
+    private Products product;
     
     public Long getId() {
         return id;
@@ -34,7 +37,14 @@ public class OrderDetails implements Serializable {
     public OrderDetails() {
     }
 
-    public OrderDetails(String product, int quantity, Orders order) {
+    public OrderDetails(int quantity, Products product) {
+        this.quantity = quantity;
+        this.product = product;
+    }
+
+    
+    
+    public OrderDetails(Products product, int quantity, Orders order) {
         this.product = product;
         this.quantity = quantity;
         this.order = order;
@@ -48,11 +58,11 @@ public class OrderDetails implements Serializable {
         this.order = order;
     }
 
-    public String getProduct() {
+    public Products getProduct() {
         return product;
     }
 
-    public void setProduct(String product) {
+    public void setProduct(Products product) {
         this.product = product;
     }
 

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"></link>
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!-- CDN path to Fontawesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"></link>
+        <!-- Own CSS-file -->
+        <h:outputStylesheet name="style.css" library="css"/>
+        <title>Cindys Cykelcenter - Admin</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./resources/template_admin.xhtml">
+            <ui:define name="content">
+                <div class="container white z-depth-3">
+                    <div class="container">
+                        <f:view>
+                            <h:form>
+                                <h:dataTable value="#{adminController.customers}" var="cust">
+                                    <h:column>
+                                        <f:facet name="header">Kund</f:facet>
+                                        #{cust.firstName} #{cust.lastName}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Land</f:facet>
+                                        #{cust.country}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Stad</f:facet>
+                                        #{cust.city}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Telefonnummer</f:facet>
+                                        #{cust.phoneNumber}
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton class="btn" value="Se Profil" action="#{adminController.profile(cust)}"></h:commandButton>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </f:view>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

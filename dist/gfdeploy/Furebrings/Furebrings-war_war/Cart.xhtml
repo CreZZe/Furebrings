@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<!--    <h:head>        
+        <title>Facelet Title</title>
+    </h:head>-->
+    <h:body>
+        
+        
+        
+        <ui:composition template="./resources/template.xhtml">
+            
+            <ui:define name="content">
+                <div class="white z-depth-3">
+                    <div class="row">
+                        <h2>KUNDVAGN</h2>
+                        <f:view>
+                            <h:form>
+                                <h:commandButton value="Gå Vidare" action="#{cartController.toOrderPage}"
+                                                 rendered="#{cartController.cartProducts.size() > 0}"></h:commandButton>
+                            </h:form>
+                        </f:view>
+                    </div>
+                    <f:view>
+                        <h:form>
+                            <h:dataTable value="#{cartController.cartProducts}" var="prod" bgcolor="white">
+                                <h:column>
+                                    <f:facet name="header">Produkt</f:facet>
+                                    #{prod.name}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Pris</f:facet>
+                                    #{prod.cost}
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Antal</f:facet>
+                                    <h:commandButton value="-" action="#{cartController.cartQuantityDecrement(prod)}"></h:commandButton>
+                                    #{prod.quantity}
+                                    <h:commandButton value="+" action="#{cartController.cartQuantityIncrement(prod)}"></h:commandButton>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">Totalt Pris Per Produkt</f:facet>
+                                    #{prod.totaltProductPrice}
+                                </h:column>        
+                            </h:dataTable>
+                            <h:outputLabel value="Totalt Pris: #{cartController.totalPrice}"></h:outputLabel>
+                        </h:form>
+                    </f:view>
+                </div>
+            </ui:define>
+            
+        </ui:composition>
+        
+    </h:body>
+</html>
+

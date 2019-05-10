@@ -4,6 +4,7 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,11 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @ManyToOne(cascade=PERSIST)
+    private boolean isPremium;
+    private String paymentOption;
+    private String shipment;
+    
+    @ManyToOne(cascade=MERGE)
     private Customer customer;
     
     @OneToMany(cascade=PERSIST, mappedBy="order")
@@ -32,6 +37,18 @@ public class Orders implements Serializable {
     public Orders(Customer customer) {
         this.customer = customer;
     }
+
+    public Orders(boolean isPremium, Customer customer) {
+        this.isPremium = isPremium;
+        this.customer = customer;
+    }
+
+    public Orders(boolean isPremium, String paymentOption, String shipment, Customer customer) {
+        this.isPremium = isPremium;
+        this.paymentOption = paymentOption;
+        this.shipment = shipment;
+        this.customer = customer;
+    }
     
     public Long getId() {
         return id;
@@ -41,7 +58,7 @@ public class Orders implements Serializable {
         this.id = id;
     }
 
-    public List<OrderDetails> getOrderDetails() {
+    public List<OrderDetails> getOrderDetails() {        
         return orderDetails;
     }
 
@@ -56,8 +73,30 @@ public class Orders implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    
-    
+
+    public boolean isIsPremium() {
+        return isPremium;
+    }
+
+    public void setIsPremium(boolean isPremium) {
+        this.isPremium = isPremium;
+    }
+
+    public String getPaymentOption() {
+        return paymentOption;
+    }
+
+    public void setPaymentOption(String paymentOption) {
+        this.paymentOption = paymentOption;
+    }
+
+    public String getShipment() {
+        return shipment;
+    }
+
+    public void setShipment(String shipment) {
+        this.shipment = shipment;
+    }
 
     @Override
     public int hashCode() {

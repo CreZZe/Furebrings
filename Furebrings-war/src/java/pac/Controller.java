@@ -1,15 +1,17 @@
 package pac;
 
+import classes.CartProduct;
+import ejb.AccountFacade;
 import entities.Account;
 import entities.Customer;
-import entities.OrderDetails;
-import entities.Orders;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UICommand;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -20,11 +22,21 @@ import javax.ejb.EJB;
 public class Controller implements Serializable {
 
     @EJB
-    private DatabaseControllerLocal databaseController;
+    private AccountFacade accountFacade;
 
+    @EJB
+    private DatabaseControllerLocal databaseController;
+    
+    @Inject
+    private ProductController prodController;
+    
+    @Inject
+    private AdminController adminController;
+    
     private Account acc;
     private String mail;
     private String pass;
+    private String pass2;
     private String accRole;
     
     
@@ -36,6 +48,9 @@ public class Controller implements Serializable {
     private String city;
     private String country;
     private Customer cust;
+    
+    private UICommand logoutLink;
+    private UICommand loginLink;    
     /**
      * Creates a new instance of Controller
      */
@@ -53,6 +68,15 @@ public class Controller implements Serializable {
     public String getPass() {
         return pass;
     }
+
+    public String getPass2() {
+        return pass2;
+    }
+
+    public void setPass2(String pass2) {
+        this.pass2 = pass2;
+    }
+    
 
     public void setPass(String pass) {
         this.pass = pass;
@@ -122,13 +146,25 @@ public class Controller implements Serializable {
         this.country = country;
     }
     
-    public void addCustomer() {
-        databaseController.addCustomer(acc);
+    public UICommand getLogoutLink() {
+        return logoutLink;
+    }
+
+    public void setLogoutLink(UICommand logoutLink) {
+        this.logoutLink = logoutLink;
+    }
+
+    public UICommand getLoginLink() {
+        return loginLink;
+    }
+
+    public void setLoginLink(UICommand loginLink) {
+        this.loginLink = loginLink;
     }
     
     public void addAccount() {
-        acc = new Account(mail, pass, "Vanlig", null);
-        databaseController.addAccount(acc);
+        acc = new Account(mail, pass, "regular", null);
+        accountFacade.register(acc);
     }
     
     public void addCustomerInformation() {
@@ -136,39 +172,70 @@ public class Controller implements Serializable {
         databaseController.addCustomerInformation(cust, mail);
     }
     
-    public void addAccountWithCustomerInformation() {
+    public String addAccountWithCustomerInformation() {
         cust = new Customer(fname, ename, phoneNumber, address, postalCode, city, country, 0);
-        acc = new Account(mail, pass, "Vanlig", cust);
-        databaseController.addAccountWithCustomerInformation(acc);
+        acc = new Account(mail, pass, "regular", cust);
+        if (!accountFacade.register(acc)) {
+            String message = "Registrering misslyckades! E-postadressen är upptagen!";
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
+            FacesContext.getCurrentInstance().addMessage("form:email", msg);
+            return "register";
+        }
+        else {
+            databaseController.checkLogin(acc);
+            checkLogin();
+            return "index";
+        }
     }
     
-    public void test() {
-        cust = new Customer("Mikael", "Fredriksson", "0737777777", "Toppartorp 123", "19333", "Stockholm", "Sweden");
+    public String login() {
+        acc = new Account(mail, pass);
+            /*
+                if str == customer --> Inloggningen gick igenom, vanlig eller premiumkund inloggad
+                if str == admin --> Inloggningen gick igenom, admin inloggad
+                if str == null --> Inloggningen lyckades inte, ingen inloggad
+            */ 
+        String result = databaseController.checkLogin(acc);
+        checkLogin();
+        prodController.fetchAllProducts();
+        if(result.equals("admin")) adminController.fetchAllCustomers();
+        return result;
+    }
+    
+    public void updateInloggedAccount(Account acc) {
+        databaseController.checkLogin(acc);
+    }
+    
+    public void dbRole() {
+        fname = databaseController.getAccountRole();
+    }
+    
+    public boolean isLoggedIn(){
+        Account account = databaseController.getAccountDB();
+        System.out.println(account == null);
+        return account != null;
+    }
+    
+    public void checkLogin(){        
+        if(!isLoggedIn()){
+            loginLink.setRendered(true);
+            logoutLink.setRendered(false);
+        } else {
+            logoutLink.setValue(databaseController.getAccountDB().getMail() + "/logga ut");
+            logoutLink.setRendered(true);
+            loginLink.setRendered(false);
 
-        Orders order1 = new Orders(cust);
-        Orders order2 = new Orders(cust);
-        
-        OrderDetails det1 = new OrderDetails("Leksak", 4, order1);
-        OrderDetails det2 = new OrderDetails("Gunga", 2, order1);
-        OrderDetails det3 = new OrderDetails("Fotboll", 5, order2);
-        
-        List<OrderDetails> details1 = new ArrayList<>();
-        details1.add(det1);
-        details1.add(det2);
-        
-        List<OrderDetails> details2 = new ArrayList<>();
-        details2.add(det3);
-        
-        order1.setOrderDetails(details1);
-        order2.setOrderDetails(details2);
-        
-        List<Orders> orders = new ArrayList<>();
-        orders.add(order1);
-        orders.add(order2);
-        
-        cust.setOrders(orders);
-        
-        acc = new Account("224Mikael@gmail.com", "asd123", "Premium", cust);
-        addCustomer();
+        }   
+    }
+    
+    public String logout(){
+        databaseController.setAccountDB(null);
+        checkLogin();
+        prodController.fetchAllProducts();
+        return "index";
+    }
+     
+    public Account getAccountDB() {
+        return databaseController.getAccountDB();
     }
 }
