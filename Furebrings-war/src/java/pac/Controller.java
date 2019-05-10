@@ -202,6 +202,10 @@ public class Controller implements Serializable {
         return result;
     }
     
+    public void updateInloggedAccount(Account acc) {
+        databaseController.checkLogin(acc);
+    }
+    
     public void dbRole() {
         fname = databaseController.getAccountRole();
     }

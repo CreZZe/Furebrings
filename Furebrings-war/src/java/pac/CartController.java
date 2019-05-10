@@ -213,6 +213,7 @@ public class CartController implements Serializable {
                 
         if ( databaseController.placeOrder(controller.getAccountDB(), paymentOption, shipment) ) {
             customerFacade.addTotalOrderValueToCustomerByName(cust.getFirstName(), cust.getLastName(), getTotalPrice());
+            controller.updateInloggedAccount(accDB);
             prodController.fetchAllProducts();
             return "orderconfirm";
         }
