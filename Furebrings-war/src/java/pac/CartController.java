@@ -190,10 +190,18 @@ public class CartController implements Serializable {
     }
     
     public String toOrderPage() {        
-        if (controller.getAccountDB() == null)
+        if (controller.getAccountDB() == null){
+            
             return "login";
-        
-        return "order";
+        } else {
+            Customer customer = controller.getAccountDB().getCustomer();
+            setAddress(customer.getAddress());
+            setCity(customer.getCity());
+            setCountry(customer.getCountry());
+            setPhoneNumber(customer.getPhoneNumber());
+            setPostalCode(customer.getPostalCode());
+            return "order";
+        }      
     }
     
     public String createOrder() {
