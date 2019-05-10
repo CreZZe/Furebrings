@@ -12,10 +12,11 @@
         <ui:composition template="./resources/template.xhtml">
             
             <ui:define name="content">
-                <f:view>
+                <div class="white z-depth-3">
+                    <f:view>
                         <h:form>
                             <h:dataTable value="#{productController.chosenProduct}" var="Product"
-                                         border="5" bgcolor="white" cellpadding="10">
+                                         border="5" cellpadding="10">
                                 <h:column>
                                     <h:graphicImage library="images" name="bicycle-161315_1280.png" width="300" rendered="#{Product.id % 3 == 0}"/>
                                     <h:graphicImage library="images" name="bicycle-161524_1280.png" width="300" rendered="#{Product.id % 3 == 1}"/>
@@ -47,7 +48,7 @@
                             </h:dataTable>
                         </h:form>
                     </f:view>
-                
+                </div>
             </ui:define>
             
         </ui:composition>

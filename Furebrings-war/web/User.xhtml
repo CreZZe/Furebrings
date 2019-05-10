@@ -11,37 +11,42 @@
         <ui:composition template="./resources/template_admin.xhtml">
             
             <ui:define name="content">
-                <h2>Min Profil</h2>
-                
-                <h:outputLabel value="#{adminController.currentCustomer.firstName} #{adminController.currentCustomer.lastName}"></h:outputLabel>
-                <h:outputLabel value="#{adminController.currentCustomer.phoneNumber}"></h:outputLabel>
-                <h:outputLabel value="#{adminController.currentCustomer.address}"></h:outputLabel>
-                <h:outputLabel value="#{adminController.currentCustomer.country}"></h:outputLabel>
-                <h:outputLabel value="#{adminController.currentCustomer.city}"></h:outputLabel>
-                <h:outputLabel value="#{adminController.currentCustomer.totalSpent}"></h:outputLabel>
-                
-                <h3>Dina tidigare köp</h3>
-                <f:view>
-                    <h:form>
-                        <h:dataTable value="#{adminController.currentCustomer.orders}" var="order">
-                            <h:column>
-                                <f:facet name="header">Ordernummer</f:facet>
-                                #{order.id}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Premium</f:facet>
-                                #{order.isPremium}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Antal Produkter</f:facet>
-                                #{order.orderDetails.size()}
-                            </h:column>
-                            <h:column>
-                                <h:commandButton class="btn" value="Se Order" action="#{adminController.order(order)}"></h:commandButton>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
-                </f:view>
+                <div class="container white z-depth-3">
+                    <div class="container">
+                        <h2><h:outputText value="
+                                           #{adminController.currentCustomer.firstName}
+                                           #{adminController.currentCustomer.lastName} - 
+                                           #{adminController.currentCustomer.totalSpent}">
+                            </h:outputText></h2>
+                        <h:outputLabel value="#{adminController.currentCustomer.phoneNumber}"></h:outputLabel>
+                        <h:outputLabel value="#{adminController.currentCustomer.address}"></h:outputLabel>
+                        <h:outputLabel value="#{adminController.currentCustomer.country}"></h:outputLabel>
+                        <h:outputLabel value="#{adminController.currentCustomer.city}"></h:outputLabel>
+
+                        <h3>Dina tidigare köp</h3>
+                        <f:view>
+                            <h:form>
+                                <h:dataTable value="#{adminController.currentCustomer.orders}" var="order">
+                                    <h:column>
+                                        <f:facet name="header">Ordernummer</f:facet>
+                                        #{order.id}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Premium</f:facet>
+                                        #{order.isPremium}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Antal Produkter</f:facet>
+                                        #{order.orderDetails.size()}
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton class="btn" value="Se Order" action="#{adminController.order(order)}"></h:commandButton>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </f:view>
+                    </div>
+                </div>
             </ui:define>
             
         </ui:composition>

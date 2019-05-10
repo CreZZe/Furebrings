@@ -18,36 +18,37 @@
     </h:head>
     <h:body>
         <ui:composition template="./resources/template_admin.xhtml">
-        
-        <ui:define name="content">
-                <f:view>
-                    <h:form>
-                        <h:dataTable value="#{adminController.customers}" var="cust">
-                            <h:column>
-                                <f:facet name="header">Kund</f:facet>
-                                #{cust.firstName} #{cust.lastName}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Land</f:facet>
-                                #{cust.country}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Stad</f:facet>
-                                #{cust.city}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Telefonnummer</f:facet>
-                                #{cust.phoneNumber}
-                            </h:column>
-                            <h:column>
-                                <h:commandButton class="btn" value="Se Profil" action="#{adminController.profile(cust)}"></h:commandButton>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
-                </f:view>
-            
+            <ui:define name="content">
+                <div class="container white z-depth-3">
+                    <div class="container">
+                        <f:view>
+                            <h:form>
+                                <h:dataTable value="#{adminController.customers}" var="cust">
+                                    <h:column>
+                                        <f:facet name="header">Kund</f:facet>
+                                        #{cust.firstName} #{cust.lastName}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Land</f:facet>
+                                        #{cust.country}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Stad</f:facet>
+                                        #{cust.city}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Telefonnummer</f:facet>
+                                        #{cust.phoneNumber}
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton class="btn" value="Se Profil" action="#{adminController.profile(cust)}"></h:commandButton>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </f:view>
+                    </div>
+                </div>
             </ui:define>
-            
         </ui:composition>
     </h:body>
 </html>

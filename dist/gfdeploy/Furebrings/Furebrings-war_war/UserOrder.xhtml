@@ -11,32 +11,34 @@
         <ui:composition template="./resources/template_admin.xhtml">
             
             <ui:define name="content">
-                
-                <f:view>
-                    <h:form>
-                        <h:dataTable value="#{adminController.currentOrder.orderDetails}" var="row">
-                            <h:column>
-                                <f:facet name="header">Produkt</f:facet>
-                                #{row.product.name}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Pris</f:facet>
-                                #{row.product.cost}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Antal</f:facet>
-                                #{row.quantity}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Kategori</f:facet>
-                                #{row.product.category.name}
-                            </h:column>
-                        </h:dataTable>
-   
-                        <h:outputLabel value="Total Pris Per Produkt: #{adminController.totalPrice}"></h:outputLabel>
-                    </h:form>
-                </f:view>
-                
+                <div class="container white z-depth-3">
+                    <div class="container">
+                        <f:view>
+                            <h:form>
+                                <h:dataTable value="#{adminController.currentOrder.orderDetails}" var="row">
+                                    <h:column>
+                                        <f:facet name="header">Produkt</f:facet>
+                                        #{row.product.name}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Pris</f:facet>
+                                        #{row.product.cost}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Antal</f:facet>
+                                        #{row.quantity}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Kategori</f:facet>
+                                        #{row.product.category.name}
+                                    </h:column>
+                                </h:dataTable>
+
+                                <h:outputLabel value="Total Pris Per Produkt: #{adminController.totalPrice}"></h:outputLabel>
+                            </h:form>
+                        </f:view>
+                    </div>
+                </div>
             </ui:define>
             
         </ui:composition>

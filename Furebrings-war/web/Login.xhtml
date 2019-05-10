@@ -12,42 +12,44 @@
             
             <ui:define name="content">
                 
-                <div class="row">
-                    <f:view>
-                        <h:form id="form">
-                            <div class="row col s6 offset-s2">
-                                <p>mail</p>
-                                <h:inputText class="input-field col s6" id="email" value="#{controller.mail}">
-                                    <f:validator validatorId="emailValidator"></f:validator>
-                                </h:inputText>
-                                <h:message for="email" errorStyle="color:red"/>
-                            </div>
+                <div class="container white z-depth-3">
+                    <div class="row">
+                        <f:view>
+                            <h:form id="form">
+                                <div class="row col s6 offset-s2">
+                                    <p>mail</p>
+                                    <h:inputText class="input-field col s6" id="email" value="#{controller.mail}">
+                                        <f:validator validatorId="emailValidator"></f:validator>
+                                    </h:inputText>
+                                    <h:message for="email" errorStyle="color:red"/>
+                                </div>
 
-                            <div class="row col s6 offset-s2">
-                                <p>lösenord</p>
-                                <h:inputSecret class="input-field col s6" id="password" value="#{controller.pass}">
-                                    <f:validator validatorId="passwordValidator"></f:validator>
-                                </h:inputSecret>
-                                <h:message for="password" errorStyle="color:red"/>
+                                <div class="row col s6 offset-s2">
+                                    <p>lösenord</p>
+                                    <h:inputSecret class="input-field col s6" id="password" value="#{controller.pass}">
+                                        <f:validator validatorId="passwordValidator"></f:validator>
+                                    </h:inputSecret>
+                                    <h:message for="password" errorStyle="color:red"/>
 
-                            </div>
-                            <div class="row col s6 offset-s2">
-                                <h:commandButton id="loggain" class="btn" value="Logga in" action="#{controller.login()}"></h:commandButton>
-                                <h:message for="loggain" errorStyle="color:red"/>
-                            </div>
+                                </div>
+                                <div class="row col s6 offset-s2">
+                                    <h:commandButton id="loggain" class="btn" value="Logga in" action="#{controller.login()}"></h:commandButton>
+                                    <h:message for="loggain" errorStyle="color:red"/>
+                                </div>
 
-                        </h:form>
-                    </f:view>    
-                    <f:view>
-                        <h:form>
-                             <div class="row col s6 offset-s2">
-                                <p>Har du inget konto?</p>
-                                <h:commandButton value="Skapa konto" class="btn blue" action="signup">
-                                    <f:param name="skipValidator" value="true" />
-                                </h:commandButton>
-                            </div>
-                        </h:form>
-                    </f:view>
+                            </h:form>
+                        </f:view>    
+                        <f:view>
+                            <h:form>
+                                 <div class="row col s6 offset-s2">
+                                    <p>Har du inget konto?</p>
+                                    <h:commandButton value="Skapa konto" class="btn blue" action="signup">
+                                        <f:param name="skipValidator" value="true" />
+                                    </h:commandButton>
+                                </div>
+                            </h:form>
+                        </f:view>
+                    </div>
                 </div>
                 
             </ui:define>

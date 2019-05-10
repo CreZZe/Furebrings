@@ -11,39 +11,40 @@
         <ui:composition template="./resources/template.xhtml">
             
             <ui:define name="content">
-                
-                <div class="row">
-                    <f:view>
-                        <h:form>
-<!--                            <h:commandButton class="btn" action="#{productController.fetchAllProducts()}" value="Show All Products"></h:commandButton>-->
-                            <h:dataTable value="#{productController.filteredProducts}" var="Product"
-                                         border="5" bgcolor="white" cellpadding="10" rendered="#{productController.filteredProducts.size() > 0}">
-                                <h:column>
-                                    <f:facet name="header">Produkt</f:facet>
-                                    <h:outputText id="o1" value="#{Product.name}"></h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Kategori</f:facet>
-                                    <h:outputText id="o2" value="#{Product.category.name}"></h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Pris</f:facet>
-                                    <h:outputText id="o3" value="#{Product.cost}"></h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Lagersaldo</f:facet>
-                                    <h:outputText id="o4" value="#{Product.quantityInStore}"></h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <h:commandButton class="btn" value="Show Detail" action="#{productController.showProductDetail(Product)}"></h:commandButton>
-                                </h:column>
-                                <h:column>
-                                    <h:commandButton class="btn" value="Add To Cart" action="#{cartController.addToCart(Product)}"></h:commandButton>
-                                </h:column>
-                            </h:dataTable>
-                            <h:outputText value="Inga produkter hittades." rendered="#{!(productController.filteredProducts.size() > 0)}" />
-                        </h:form>
-                    </f:view>
+                <div class="white z-depth-3">
+                    <div class="row">
+                        <f:view>
+                            <h:form>
+    <!--                            <h:commandButton class="btn" action="#{productController.fetchAllProducts()}" value="Show All Products"></h:commandButton>-->
+                                <h:dataTable value="#{productController.filteredProducts}" var="Product"
+                                             border="5" cellpadding="10" rendered="#{productController.filteredProducts.size() > 0}">
+                                    <h:column>
+                                        <f:facet name="header">Produkt</f:facet>
+                                        <h:outputText id="o1" value="#{Product.name}"></h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Kategori</f:facet>
+                                        <h:outputText id="o2" value="#{Product.category.name}"></h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Pris</f:facet>
+                                        <h:outputText id="o3" value="#{Product.cost}"></h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Lagersaldo</f:facet>
+                                        <h:outputText id="o4" value="#{Product.quantityInStore}"></h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton class="btn" value="Show Detail" action="#{productController.showProductDetail(Product)}"></h:commandButton>
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton class="btn" value="Add To Cart" action="#{cartController.addToCart(Product)}"></h:commandButton>
+                                    </h:column>
+                                </h:dataTable>
+                                <h:outputText value="Inga produkter hittades." rendered="#{!(productController.filteredProducts.size() > 0)}" />
+                            </h:form>
+                        </f:view>
+                    </div>
                 </div>
                 
             </ui:define>
