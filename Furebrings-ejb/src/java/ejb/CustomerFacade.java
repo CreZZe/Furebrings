@@ -5,8 +5,10 @@
  */
 package ejb;
 
+import entities.Account;
 import entities.Customer;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.CacheRetrieveMode;
 import javax.persistence.EntityManager;
@@ -19,6 +21,9 @@ import javax.persistence.Query;
  */
 @Stateless
 public class CustomerFacade extends AbstractFacade<Customer> {
+
+    @EJB
+    private AccountFacade accountFacade;
 
     @PersistenceContext(unitName = "Furebrings-ejbPU")
     private EntityManager em;
@@ -45,17 +50,26 @@ public class CustomerFacade extends AbstractFacade<Customer> {
         }
     }
     
-    public void addTotalOrderValueToCustomerByName(String fName, String lName, float amount) {
+    public boolean addTotalOrderValueToCustomerByName(String fName, String lName, float amount) {
         Query q = em.createQuery("SELECT c FROM Customer c WHERE c.firstName =:firstName AND c.lastName =:lastName");
         q.setParameter("firstName", fName);
         q.setParameter("lastName", lName);
         
         try {
             Customer cust = (Customer) q.getSingleResult();
+            cust.setTotalSpent(cust.getTotalSpent() + amount);
+            edit(cust);
             
+            if (cust.getTotalSpent() >= 500000) {
+                Account acc = accountFacade.findAccountByCustomerID(cust.getId());
+                acc.setAccRole("premium");
+                accountFacade.edit(acc);
+            }
+            
+            return true;
         }
         catch (Exception e) {
-            
+            return false;
         }
     }
 

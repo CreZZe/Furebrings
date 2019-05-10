@@ -210,8 +210,9 @@ public class CartController implements Serializable {
         cust.setPhoneNumber(phoneNumber);
         cust.setPostalCode(postalCode);
         customerFacade.edit(cust);
-        
+                
         if ( databaseController.placeOrder(controller.getAccountDB(), paymentOption, shipment) ) {
+            customerFacade.addTotalOrderValueToCustomerByName(cust.getFirstName(), cust.getLastName(), getTotalPrice());
             prodController.fetchAllProducts();
             return "orderconfirm";
         }

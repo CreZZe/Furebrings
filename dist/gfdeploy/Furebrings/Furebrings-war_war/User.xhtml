@@ -29,6 +29,10 @@
                                 #{order.id}
                             </h:column>
                             <h:column>
+                                <f:facet name="header">Premium</f:facet>
+                                #{order.isPremium}
+                            </h:column>
+                            <h:column>
                                 <f:facet name="header">Antal Produkter</f:facet>
                                 #{order.orderDetails.size()}
                             </h:column>
