@@ -30,6 +30,9 @@ public class Controller implements Serializable {
     @Inject
     private ProductController prodController;
     
+    @Inject
+    private AdminController adminController;
+    
     private Account acc;
     private String mail;
     private String pass;
@@ -195,6 +198,7 @@ public class Controller implements Serializable {
         String result = databaseController.checkLogin(acc);
         checkLogin();
         prodController.fetchAllProducts();
+        if(result.equals("admin")) adminController.fetchAllCustomers();
         return result;
     }
     
