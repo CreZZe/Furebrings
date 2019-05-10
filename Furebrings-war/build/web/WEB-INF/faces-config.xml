@@ -24,8 +24,8 @@
             <to-view-id>/SignUp.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>invalid</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
+            <from-outcome>null</from-outcome>
+            <to-view-id>/Login.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>admin</from-outcome>

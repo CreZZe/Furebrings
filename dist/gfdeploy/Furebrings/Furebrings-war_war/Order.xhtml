@@ -45,7 +45,8 @@
                             <h:message for="country" errorStyle="color:red"/>
 
                             <p>Betalningsmetod</p>
-                            <h:selectOneRadio id="payment" value="#{cartController.paymentOption}" required="true">
+                            <h:selectOneRadio id="payment" value="#{cartController.paymentOption}" required="true"
+                                              requiredMessage="Ange betalningsmetod!">
                                 <f:selectItem itemLabel="Swish" itemValue="Swish" />
                                 <f:selectItem itemLabel="VISA/MasterCard" itemValue="VISA/MasterCard" />
                                 <f:selectItem itemLabel="Faktura" itemValue="Faktura" />
@@ -55,12 +56,14 @@
                             <br/>
 
                             <p>Leveransmetod</p>
-                            <h:selectOneRadio id="shipment" value="#{cartController.shipment}" required="true">
+                            <h:selectOneRadio id="shipment" value="#{cartController.shipment}" required="true"
+                                              requiredMessage="Ange leveransmetod!">
                                 <f:selectItem itemLabel="Avhämtning" itemValue="Avhämtning"  />
                                 <f:selectItem itemLabel="Standardleverans" itemValue="Standardleverans"  />
                                 <f:selectItem itemLabel="Expressleverans" itemValue="Expressleverans"  />
                             </h:selectOneRadio>
                             <h:message for="shipment" errorStyle="color:red"/>
+                            <br /><br />
                             <h:commandButton value="Genomför köp" action="#{cartController.createOrder}"></h:commandButton>
                         </h:form>
                     </div>
