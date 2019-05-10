@@ -6,7 +6,9 @@
 package ejb;
 
 import entities.Customer;
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.CacheRetrieveMode;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -55,5 +57,12 @@ public class CustomerFacade extends AbstractFacade<Customer> {
         catch (Exception e) {
             
         }
+    }
+
+    @Override
+    public List<Customer> findAll() {
+        Query q = em.createQuery("select o from Customer o");
+        q.setHint("javax.persistence.cache.retrieveMode", CacheRetrieveMode.BYPASS);
+        return q.getResultList();
     }
 }
