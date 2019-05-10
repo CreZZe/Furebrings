@@ -42,4 +42,18 @@ public class CustomerFacade extends AbstractFacade<Customer> {
             return null;
         }
     }
+    
+    public void addTotalOrderValueToCustomerByName(String fName, String lName, float amount) {
+        Query q = em.createQuery("SELECT c FROM Customer c WHERE c.firstName =:firstName AND c.lastName =:lastName");
+        q.setParameter("firstName", fName);
+        q.setParameter("lastName", lName);
+        
+        try {
+            Customer cust = (Customer) q.getSingleResult();
+            
+        }
+        catch (Exception e) {
+            
+        }
+    }
 }
