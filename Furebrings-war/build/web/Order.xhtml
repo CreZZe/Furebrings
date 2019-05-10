@@ -18,28 +18,51 @@
                         <h:form>
                         
                             <div class="totalprice"><h:outputLabel value="Totalt Pris: #{cartController.totalPrice}"></h:outputLabel></div>
-                            Telefonnummer <h:inputText value="#{cartController.phoneNumber}"></h:inputText>
-                            Adress <h:inputText value="#{cartController.address}"></h:inputText>
-                            Postnummer <h:inputText value="#{cartController.postalCode}"></h:inputText>
-                            Ort <h:inputText value="#{cartController.city}"></h:inputText>
-                            Land <h:inputText value="#{cartController.country}"></h:inputText>
-                            Meddelande <h:inputTextarea></h:inputTextarea>
+                            <p>Telefonnummer (börja med 07 eller +467 sedan 8 siffror)</p>
+                            <h:inputText id="tel" value="#{cartController.phoneNumber}" maxlength="12">
+                                <f:validator validatorId="telephoneValidator"></f:validator>
+                            </h:inputText>
+                            <h:message for="tel" errorStyle="color:red"/>
+                            <p>Adress (t.ex. Cykelgatan 1)</p> 
+                            <h:inputText id="address" value="#{cartController.address}">
+                                <f:validator validatorId="addressValidator"></f:validator>
+                            </h:inputText>
+                            <h:message for="address" errorStyle="color:red"/>
+                            <p>Postnummer (t.ex. 12345)</p>
+                            <h:inputText id="zipcode" value="#{cartController.postalCode}" maxlength="5">
+                                <f:validator validatorId="zipCodeValidator"></f:validator>
+                            </h:inputText>
+                            <h:message for="zipcode" errorStyle="color:red"/>
+                            <p>Stad (t.ex. Stockholm)</p>
+                            <h:inputText id="town" value="#{cartController.city}">
+                                <f:validator validatorId="textInputValidator"></f:validator>
+                            </h:inputText>
+                            <h:message for="town" errorStyle="color:red"/>
+                            <p>Land (t.ex. Sverige)</p>
+                            <h:inputText id="country" value="#{cartController.country}">
+                                <f:validator validatorId="textInputValidator"></f:validator>
+                            </h:inputText>
+                            <h:message for="country" errorStyle="color:red"/>
+                            <p>Meddelande</p> 
+                            <h:inputTextarea></h:inputTextarea>
 
-                                <p>Betalningsmetod</p>
-                                <h:selectOneRadio value="#{cartController.paymentOption}">
-                                    <f:selectItem itemLabel="Swish" itemValue="Swish" />
-                                    <f:selectItem itemLabel="VISA/MasterCard" itemValue="VISA/MasterCard" />
-                                    <f:selectItem itemLabel="Faktura" itemValue="Faktura" />
-                                </h:selectOneRadio>
+                            <p>Betalningsmetod</p>
+                            <h:selectOneRadio id="payment" value="#{cartController.paymentOption}" required="true">
+                                <f:selectItem itemLabel="Swish" itemValue="Swish" />
+                                <f:selectItem itemLabel="VISA/MasterCard" itemValue="VISA/MasterCard" />
+                                <f:selectItem itemLabel="Faktura" itemValue="Faktura" />
+                            </h:selectOneRadio>
+                            <h:message for="payment" errorStyle="color:red"/>
                             
-                                <br />
+                            <br/>
 
-                                <p>Leveransmetod</p>
-                                <h:selectOneRadio value="#{cartController.shipment}">
-                                    <f:selectItem itemLabel="Avhämtning" itemValue="Avhämtning"  />
-                                    <f:selectItem itemLabel="Standardleverans" itemValue="Standardleverans"  />
-                                    <f:selectItem itemLabel="Expressleverans" itemValue="Expressleverans"  />
-                                </h:selectOneRadio>
+                            <p>Leveransmetod</p>
+                            <h:selectOneRadio id="shipment" value="#{cartController.shipment}" required="true">
+                                <f:selectItem itemLabel="Avhämtning" itemValue="Avhämtning"  />
+                                <f:selectItem itemLabel="Standardleverans" itemValue="Standardleverans"  />
+                                <f:selectItem itemLabel="Expressleverans" itemValue="Expressleverans"  />
+                            </h:selectOneRadio>
+                            <h:message for="shipment" errorStyle="color:red"/>
                             <h:commandButton value="Genomför köp" action="#{cartController.createOrder}"></h:commandButton>
                         </h:form>
                     </div>

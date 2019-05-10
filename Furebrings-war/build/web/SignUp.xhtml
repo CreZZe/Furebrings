@@ -45,7 +45,7 @@
 
                             <div class="row col s6 offset-s2">
                                 <p>Postnummer (t.ex. 12345)</p>
-                                <h:inputText id="zipcode" value="#{controller.postalCode}">
+                                <h:inputText id="zipcode" value="#{controller.postalCode}" maxlength="5">
                                     <f:validator validatorId="zipCodeValidator"></f:validator>
                                 </h:inputText>
                                 <h:message for="zipcode" errorStyle="color:red"/>
@@ -69,7 +69,7 @@
 
                             <div class="row col s6 offset-s2">
                                 <p>Telefonnummer (börja med 07 eller +467 sedan 8 siffror)</p>
-                                <h:inputText id="nummbber" value="#{controller.phoneNumber}">
+                                <h:inputText id="nummbber" value="#{controller.phoneNumber}" maxlength="12">
                                     <f:validator validatorId="telephoneValidator"></f:validator>
                                 </h:inputText>
                                 <h:message for="nummbber" errorStyle="color:red"/>
