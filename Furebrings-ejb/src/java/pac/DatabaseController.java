@@ -155,7 +155,7 @@ public class DatabaseController implements DatabaseControllerLocal {
                 item.setQuantity(item.getQuantity() - 1);
                 
                 if (item.getQuantity() == 0)
-                    cartProductRow.remove(item);
+                    cartProductRow.remove(i);
                 
                 return true;
             }
