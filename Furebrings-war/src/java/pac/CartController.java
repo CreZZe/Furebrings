@@ -223,6 +223,7 @@ public class CartController implements Serializable {
             customerFacade.addTotalOrderValueToCustomerByName(cust.getFirstName(), cust.getLastName(), getTotalPrice());
             controller.updateInloggedAccount(accDB);
             prodController.fetchAllProducts();
+            totalPrice = 0;
             return "orderconfirm";
         }
         
